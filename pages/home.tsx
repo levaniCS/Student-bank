@@ -7,6 +7,8 @@ const HomePage = () => {
         <h3>Student bank</h3>
         <p>Levani / Balance: 50$</p>
       </nav>
+
+      
     </main>
   )
 }

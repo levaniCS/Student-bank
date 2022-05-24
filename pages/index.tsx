@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useEffect } from "react";
 import Header from "../components/header";
 import styles from "../styles/Home.module.css";
 
