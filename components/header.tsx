@@ -12,10 +12,10 @@ const Header = () => {
           />
 
           <Ul>
-            <H1 style={{ color: "black" }}>როგორ მუშაობს</H1>
-            <H1>Pricing</H1>
-            <H1>Features</H1>
-            <H1>About</H1>
+            <H1 style={{ color: "black" }}>პროცესები</H1>
+            <H1>რას გთავაზობთ?</H1>
+            <H1>ჩვენს შესახებ</H1>
+            <H1>კონტაქტი</H1>
           </Ul>
         </Nav>
       </HeaderSection>
@@ -54,5 +54,9 @@ const Ul = styled("div")`
 const H1 = styled("h1")`
   font-size: 16px;
   color: #727272;
+  transition: 0.9s;
   cursor: pointer;
+  &:hover {
+    color: black;
+  }
 `;

@@ -1,13 +1,21 @@
 import type { NextPage } from "next";
-import Link from "next/link";
+import AboutUs from "../components/about";
+import Contact from "../components/contact";
+import Footer from "../components/footer";
 import Header from "../components/header";
+import Info from "../components/Info";
+import Offers from "../components/offers";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div>
       <Header />
-      <Link href={"/auth"}>Get started</Link>
+      <Info />
+      <Offers />
+      <AboutUs />
+      <Contact />
+      <Footer />
     </div>
   );
 };
