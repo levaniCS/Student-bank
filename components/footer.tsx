@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <FooterSection>
       <FooterContainer>
-        <Logo src="/icons/main-logo.png" alt="" />
+        <Logo src="/icons/logo-short.svg" alt="" />
         <H1>© 2022 არწივი პროდაქშენი</H1>
       </FooterContainer>
     </FooterSection>
@@ -33,7 +33,7 @@ const FooterContainer = styled("div")`
   }
 `;
 const Logo = styled("img")`
-  /* width: 125px; */
+  width: 50px;
   @media (max-width: 950px) {
     width: 93px;
   }

@@ -8,7 +8,7 @@ const Header = () => {
         <Nav>
           <img
             style={{ height: "40px", cursor: "pointer" }}
-            src="/icons/main-logo.png"
+            src="/icons/logo-long.svg"
           />
 
           <Ul>
