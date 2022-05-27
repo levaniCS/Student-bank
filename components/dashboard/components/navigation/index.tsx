@@ -1,8 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { AuthDataProps } from "../../../../utils/form.interfaces";
 
-const Navigation = () => {
+const Navigation = ({ status, user } : AuthDataProps) => {
   const [activeNav, setActiveNav] = useState("main");
+
+  const isStudent = status.loggedIn && !user.userDetails.isParent
 
   return (
     <NavigationComponent>
@@ -57,29 +60,33 @@ const Navigation = () => {
               <Icon src="/icons/invoice.svg" alt="" />
               <NavTitle>ინვოისი</NavTitle>
             </NavListItem>
-            <NavListItem
-              onClick={() => setActiveNav("goals")}
-              style={{
-                background: activeNav === "goals" ? "#E5F1FF" : "#f6f8fb40",
-              }}
-            >
-              {activeNav === "goals" && <CornerLine style={{ top: "370px" }} />}
-              <Icon src="/icons/text.svg" alt="" />
-              <NavTitle>მიზნები</NavTitle>
-            </NavListItem>
+            {isStudent && (
+              <>
+                <NavListItem
+                  onClick={() => setActiveNav("goals")}
+                  style={{
+                    background: activeNav === "goals" ? "#E5F1FF" : "#f6f8fb40",
+                  }}
+                >
+                  {activeNav === "goals" && <CornerLine style={{ top: "370px" }} />}
+                  <Icon src="/icons/text.svg" alt="" />
+                  <NavTitle>მიზნები</NavTitle>
+                </NavListItem>
 
-            <NavListItem
-              onClick={() => setActiveNav("statistic")}
-              style={{
-                background: activeNav === "statistic" ? "#E5F1FF" : "#f6f8fb40",
-              }}
-            >
-              {activeNav === "statistic" && (
-                <CornerLine style={{ top: "432px" }} />
-              )}
-              <Icon src="/icons/statistic.svg" alt="" />
-              <NavTitle>სტატისტიკა</NavTitle>
-            </NavListItem>
+                <NavListItem
+                  onClick={() => setActiveNav("statistic")}
+                  style={{
+                    background: activeNav === "statistic" ? "#E5F1FF" : "#f6f8fb40",
+                  }}
+                >
+                  {activeNav === "statistic" && (
+                    <CornerLine style={{ top: "432px" }} />
+                  )}
+                  <Icon src="/icons/statistic.svg" alt="" />
+                  <NavTitle>სტატისტიკა</NavTitle>
+                </NavListItem>
+              </>
+            )}
           </NavList>
 
           <NavList>

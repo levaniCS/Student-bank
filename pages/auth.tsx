@@ -1,23 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled, {  } from 'styled-components'
 import Login from '../components/forms/login'
 import Register from '../components/forms/register'
+import { AuthContext } from '../context/authContext';
+import { AuthDataProps } from '../utils/form.interfaces';
 
-const StartupPage = () => {
+
+const AuthPage = () => {
+  const { status, user } = useContext<AuthDataProps>(AuthContext);
   const [isLogin, setIsLogin] = useState(true)
-
-
 
   return (
     <Container>
       <StyledRightContainer>
-        {isLogin ? <Login /> : <Register />}
-        <StyledLinkText
-          style={{ 
-
-          }}
-          onClick={() => setIsLogin(!isLogin)}
-        >
+        {isLogin ? <Login status={status} user={user} /> : <Register status={status} user={user} />}
+        <StyledLinkText onClick={() => setIsLogin(!isLogin)}>
           {isLogin ? 'არ ხართ დარეგისტრირებული? გაიარეთ რეგისტრაცია აქიდან' : 'დაბრუნდით ავტორიზაციის გვერდზე'}
         </StyledLinkText>
       </StyledRightContainer>
@@ -64,4 +61,4 @@ const StyledLinkText = styled.div`
     }
 `
 
-export default StartupPage
+export default AuthPage

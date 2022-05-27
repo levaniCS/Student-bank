@@ -8,21 +8,14 @@ import {
   StyledErrorMessage
 } from './formStyles'
 import { useForm, validateInput } from '../../utils/useForm'
-
-interface RegisterData {
-  name: String;
-  surname: String;
-  email: String;
-  password: String;
-  passwordRepeat: String;
-}
+import { AuthDataProps, RegisterDataProps } from '../../utils/form.interfaces';
 
 
-const Register = () => {
+const Register = (props: AuthDataProps) => {
   const router = useRouter()
-  const initialState: RegisterData = { name: '', surname: '', email: '', password: '', passwordRepeat: '' };
+  const initialState: RegisterDataProps = { name: '', surname: '', email: '', password: '', passwordRepeat: '' };
   const [values, setValues] = useForm(initialState);
-  const [errors, setErrors] = useState<Partial<RegisterData>>({})
+  const [errors, setErrors] = useState<Partial<RegisterDataProps>>({})
 
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -34,8 +27,10 @@ const Register = () => {
       setErrors(errors)
       return
     }
-  
+
+    
     console.log(values);
+    props.status.register(values)
     router.push('/dashboard')
   };
 

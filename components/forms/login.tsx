@@ -7,18 +7,15 @@ import {
   StyledErrorMessage
 } from './formStyles'
 import { useForm, validateInput } from '../../utils/useForm'
-
-interface LoginData {
-  name: String;
-  password: String;
-}
+import { AuthDataProps, LoginDataProps } from '../../utils/form.interfaces';
 
 
-const Login = () => {
+
+const Login = (props: AuthDataProps) => {
   const router = useRouter()
-  const initialState: LoginData = { name: '', password: '' };
+  const initialState: LoginDataProps = { name: '', password: '' };
   const [values, setValues] = useForm(initialState);
-  const [errors, setErrors] = useState<Partial<LoginData>>({})
+  const [errors, setErrors] = useState<Partial<LoginDataProps>>({})
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     setErrors({})
@@ -30,6 +27,7 @@ const Login = () => {
       return
     }
   
+    props.status.login(values)
     router.push('/dashboard')
   };
   return (

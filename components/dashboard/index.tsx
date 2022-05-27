@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import MainSection from "./components/main";
 import Navigation from "./components/navigation";
+import { AuthContext } from '../../context/authContext';
+
 
 const DashboardPage = () => {
+  const { status, user } = useContext(AuthContext);
+
+
   return (
     <DashboardContainer>
       <DashboardSection>
-        <Navigation />
-        <MainSection />
+        <Navigation status={status} user={user} />
+        <MainSection status={status} user={user} />
       </DashboardSection>
     </DashboardContainer>
   );

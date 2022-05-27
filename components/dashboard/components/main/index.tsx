@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { AuthDataProps } from "../../../../utils/form.interfaces";
 
-const MainSection = () => {
+
+const MainSection = ({ status, user } : AuthDataProps) => {
   return (
     <MainSectionComponent>
       <MainContainer>
@@ -9,48 +11,51 @@ const MainSection = () => {
           <Profile>
             <img style={{ width: "30px" }} src="/icons/search.svg" alt="" />
             <ProfilePhoto src="/images/profile.jpg" alt="" />
+            {status.loggedIn && <BalanceTitle>{`${user.userDetails.name} - ${user.userDetails.isParent ? 'Parent' : 'Child'}`}</BalanceTitle>}
           </Profile>
         </Header>
-        <Container>
-          <MyCard>
-            <Card src="/images/card.png" alt="" />
-            <Balance>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "10px",
-                  justifyContent: "space-between",
-                }}
-              >
+        {status.loggedIn && (
+          <Container>
+            <MyCard>
+              <Card src="/images/card.png" alt="" />
+              <Balance>
                 <div
                   style={{
                     display: "flex",
-                    alignItems: "center",
+                    gap: "10px",
+                    justifyContent: "space-between",
                   }}
                 >
-                  <img src="/icons/mastercard.svg" alt="" />
-                  <BalanceTitle style={{ fontSize: "14px" }}>
-                    ბალანსი
-                  </BalanceTitle>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img src="/icons/mastercard.svg" alt="" />
+                    <BalanceTitle style={{ fontSize: "14px" }}>
+                      ბალანსი
+                    </BalanceTitle>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      textAlign: "right",
+                    }}
+                  >
+                    <BalanceTitle style={{ fontSize: "24px" }}>
+                      ₾ 800
+                    </BalanceTitle>
+                    <BalanceTitle style={{ fontSize: "14px", color: "#61BB84" }}>
+                      $ 266
+                    </BalanceTitle>
+                  </div>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    textAlign: "right",
-                  }}
-                >
-                  <BalanceTitle style={{ fontSize: "24px" }}>
-                    ₾ 800
-                  </BalanceTitle>
-                  <BalanceTitle style={{ fontSize: "14px", color: "#61BB84" }}>
-                    $ 266
-                  </BalanceTitle>
-                </div>
-              </div>
-            </Balance>
-          </MyCard>
-        </Container>
+              </Balance>
+            </MyCard>
+          </Container>
+        )}
       </MainContainer>
     </MainSectionComponent>
   );
