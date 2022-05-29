@@ -1,10 +1,8 @@
-import { useState } from "react";
 import styled from "styled-components";
-import { AuthDataProps } from "../../../../utils/form.interfaces";
+import { AuthDataProps, NavProps } from "../../../../utils/form.interfaces";
 
-const Navigation = ({ status, user } : AuthDataProps) => {
-  const [activeNav, setActiveNav] = useState("main");
 
+const Navigation = ({ status, user, setActiveNav, activeNav  } : AuthDataProps & NavProps) => {
   const isStudent = status.loggedIn && !user.userDetails.isParent
 
   return (
@@ -25,12 +23,12 @@ const Navigation = ({ status, user } : AuthDataProps) => {
               <NavTitle>მთავარი</NavTitle>
             </NavListItem>
             <NavListItem
-              onClick={() => setActiveNav("family")}
+              onClick={() => setActiveNav("student")}
               style={{
-                background: activeNav === "family" ? "#E5F1FF" : "#f6f8fb40",
+                background: activeNav === "student" ? "#E5F1FF" : "#f6f8fb40",
               }}
             >
-              {activeNav === "family" && (
+              {activeNav === "student" && (
                 <CornerLine style={{ top: "175px" }} />
               )}
               <Icon src="/icons/family.svg" alt="" />

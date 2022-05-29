@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import styled, {  } from 'styled-components'
+import styled from 'styled-components'
 import Login from '../components/forms/login'
 import Register from '../components/forms/register'
 import { AuthContext } from '../context/authContext';
@@ -7,13 +7,13 @@ import { AuthDataProps } from '../utils/form.interfaces';
 
 
 const AuthPage = () => {
-  const { status, user } = useContext<AuthDataProps>(AuthContext);
+  const {status, user, students } = useContext<AuthDataProps>(AuthContext);
   const [isLogin, setIsLogin] = useState(true)
 
   return (
     <Container>
       <StyledRightContainer>
-        {isLogin ? <Login status={status} user={user} /> : <Register status={status} user={user} />}
+        {isLogin ? <Login status={status} user={user} students={students} /> : <Register status={status} user={user} students={students} />}
         <StyledLinkText onClick={() => setIsLogin(!isLogin)}>
           {isLogin ? 'არ ხართ დარეგისტრირებული? გაიარეთ რეგისტრაცია აქიდან' : 'დაბრუნდით ავტორიზაციის გვერდზე'}
         </StyledLinkText>

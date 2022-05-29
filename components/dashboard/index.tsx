@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import MainSection from "./components/main";
 import Navigation from "./components/navigation";
@@ -6,14 +6,15 @@ import { AuthContext } from '../../context/authContext';
 
 
 const DashboardPage = () => {
-  const { status, user } = useContext(AuthContext);
+  const [activeNav, setActiveNav] = useState("main");
+  const ctx = useContext(AuthContext);
 
 
   return (
     <DashboardContainer>
       <DashboardSection>
-        <Navigation status={status} user={user} />
-        <MainSection status={status} user={user} />
+        <Navigation {...ctx} setActiveNav={setActiveNav} activeNav={activeNav} />
+        <MainSection {...ctx} activeNav={activeNav} setActiveNav={setActiveNav} />
       </DashboardSection>
     </DashboardContainer>
   );

@@ -11,7 +11,7 @@ import { useForm, validateInput } from '../../utils/useForm'
 import { AuthDataProps, RegisterDataProps } from '../../utils/form.interfaces';
 
 
-const Register = (props: AuthDataProps) => {
+const Register = (props: AuthDataProps & { isStudentAdd?: boolean, onCancel?: () => void, setActiveNav?: (a: string) => void }) => {
   const router = useRouter()
   const initialState: RegisterDataProps = { name: '', surname: '', email: '', password: '', passwordRepeat: '' };
   const [values, setValues] = useForm(initialState);
@@ -28,15 +28,20 @@ const Register = (props: AuthDataProps) => {
       return
     }
 
-    
     console.log(values);
-    props.status.register(values)
-    router.push('/dashboard')
+
+    if(props.isStudentAdd) {
+      props.students.addStudent(values)
+      props.setActiveNav && props.setActiveNav('main')
+    } else {
+      props.status.register(values)
+      router.push('/dashboard')
+    }
   };
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <h1>რეგისტრაცია</h1>
+      {!props.isStudentAdd && <h1>რეგისტრაცია</h1>}
       <StyledInput placeholder='სახელი' type={'text'} name='name' value={values.name} onChange={setValues} />
       {errors.name && <StyledErrorMessage>{errors.name}</StyledErrorMessage>}
       <StyledInput placeholder='გვარი' type={'text'} name='surname' value={values.surname} onChange={setValues} />
@@ -47,7 +52,14 @@ const Register = (props: AuthDataProps) => {
       {errors.password && <StyledErrorMessage>{errors.password}</StyledErrorMessage>}
       <StyledInput placeholder='გაიმეორეთ პაროლი' type={'password'} name='passwordRepeat' value={values.passwordRepeat} onChange={setValues} />
       {errors.passwordRepeat && <StyledErrorMessage>{errors.passwordRepeat}</StyledErrorMessage>}
-      <StyledButton type='submit'>რეგისტრაცია</StyledButton>
+      {props.isStudentAdd ? (
+        <div>
+          <StyledButton type='submit'>რეგისტრაცია</StyledButton>
+          <StyledButton style={{ background: 'rgb(40, 97, 161)' }} onClick={props.onCancel}>გაუქმება</StyledButton>
+        </div>
+      ) : (
+        <StyledButton type='submit'>რეგისტრაცია</StyledButton>
+      )}
     </StyledForm>
   )
 }

@@ -5,6 +5,8 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
     const [ loggedIn, setLoggedIn ] = useState(false);
     const [userDetails, setUserDetails] = useState([]);
+    const [students, setStudents] = useState([]);
+
 
     const login = values => {
         setLoggedIn(true);
@@ -22,6 +24,17 @@ const AuthProvider = ({ children }) => {
         });
     }
 
+    
+    const addStudent = values => {
+        console.log('students', students)
+        const oldStudents = [...students]
+        const newStudent = {...values, isParent: false}
+
+        setStudents([
+            ...oldStudents, newStudent
+        ]);
+    }
+
     const logout = () => {
         setLoggedIn(false);
         setUserDetails([]);
@@ -33,6 +46,10 @@ const AuthProvider = ({ children }) => {
             login,
             logout,
             register
+        },
+        students: {
+            addStudent,
+            list: students
         },
         user: {
             userDetails,

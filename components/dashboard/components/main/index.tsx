@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { AuthDataProps } from "../../../../utils/form.interfaces";
+import { AuthAndNavProps } from "../../../../utils/form.interfaces";
+import MainContent from "../mainContent/mainContent";
 
 
-const MainSection = ({ status, user } : AuthDataProps) => {
+const MainSection = ({ status, user, activeNav, setActiveNav, students } : AuthAndNavProps) => {
   return (
     <MainSectionComponent>
       <MainContainer>
@@ -11,51 +12,10 @@ const MainSection = ({ status, user } : AuthDataProps) => {
           <Profile>
             <img style={{ width: "30px" }} src="/icons/search.svg" alt="" />
             <ProfilePhoto src="/images/profile.jpg" alt="" />
-            {status.loggedIn && <BalanceTitle>{`${user.userDetails.name} - ${user.userDetails.isParent ? 'Parent' : 'Child'}`}</BalanceTitle>}
+            {status.loggedIn && <Title>{`${user.userDetails.name} - ${user.userDetails.isParent ? 'Parent' : 'Child'}`}</Title>}
           </Profile>
         </Header>
-        {status.loggedIn && (
-          <Container>
-            <MyCard>
-              <Card src="/images/card.png" alt="" />
-              <Balance>
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "10px",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img src="/icons/mastercard.svg" alt="" />
-                    <BalanceTitle style={{ fontSize: "14px" }}>
-                      ბალანსი
-                    </BalanceTitle>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      textAlign: "right",
-                    }}
-                  >
-                    <BalanceTitle style={{ fontSize: "24px" }}>
-                      ₾ 800
-                    </BalanceTitle>
-                    <BalanceTitle style={{ fontSize: "14px", color: "#61BB84" }}>
-                      $ 266
-                    </BalanceTitle>
-                  </div>
-                </div>
-              </Balance>
-            </MyCard>
-          </Container>
-        )}
+        <MainContent activeNav={activeNav} setActiveNav={setActiveNav} status={status} user={user} students={students} />
       </MainContainer>
     </MainSectionComponent>
   );
@@ -71,7 +31,6 @@ const MainSectionComponent = styled("div")`
 const MainContainer = styled("div")`
   width: 100%;
 `;
-const Container = styled("div")``;
 
 const Header = styled("div")`
   width: 100%;
@@ -95,29 +54,3 @@ const ProfilePhoto = styled("img")`
   height: 50px;
 `;
 
-const Card = styled("img")`
-  width: 350px;
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.01);
-  }
-`;
-const MyCard = styled("div")`
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-`;
-const Balance = styled("div")`
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
-  width: 85%;
-  border-radius: 20px;
-  padding: 15px;
-  margin-left: 1.5rem;
-`;
-const BalanceTitle = styled("h1")`
-  font-size: 14px;
-  color: #798ba3;
-  font-weight: 600;
-  padding: 0;
-  margin: 0;
-`;
