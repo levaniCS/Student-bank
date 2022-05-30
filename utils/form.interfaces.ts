@@ -1,21 +1,21 @@
 export interface AuthDataProps {
   status: {
-    loggedIn: boolean,
-    login: (v: Partial<RegisterDataProps>) => void,
-    register: (v: RegisterDataProps) => void
-    logout: () => void
-  },
+    loggedIn: boolean;
+    login: (v: Partial<RegisterDataProps>) => void;
+    register: (v: RegisterDataProps) => void;
+    logout: () => void;
+  };
   students: {
-    list: [RegisterDataProps],
-    addStudent: (v: RegisterDataProps) => void
-  },
+    list: [RegisterDataProps];
+    addStudent: (v: RegisterDataProps) => void;
+  };
   user: {
     userDetails: {
-      name: String
-      isParent: boolean,
-    },
-    setUserDetails: () => void
-  }
+      name: String;
+      isParent: boolean;
+    };
+    setUserDetails: () => void;
+  };
 }
 
 export interface RegisterDataProps {
@@ -32,8 +32,8 @@ export interface LoginDataProps {
 }
 
 export interface NavProps {
-  setActiveNav: (str: string) => void
-  activeNav?: string
+  setActiveNav: (str: string) => void;
+  activeNav?: string;
 }
 
 export interface AuthAndNavProps extends AuthDataProps, NavProps {}
