@@ -17,11 +17,12 @@ const DashboardPage = () => {
   const renderComponent = () => {
     switch (tab) {
       case "main":
-        return <MainSection />;
+        return <MainSection {...ctx} />;
       case "student":
-        return <Student />;
+        return <Student {...ctx} />;
     }
   };
+
   return (
     <div>
       <DashboardContainer>

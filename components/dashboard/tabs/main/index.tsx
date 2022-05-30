@@ -15,18 +15,18 @@ import { StyledButton } from "../../../forms/formStyles";
 // }
 
 const MainSection = ({ students, setActiveNav }: AuthAndNavProps) => {
-  // const list = students || [];
+  const list = students;
 
-  // const renderStudentList = () =>
-  //   list.map((i: RegisterDataProps, idx: number) => {
-  //     return (
-  //       <StudentItem key={idx}>
-  //         <p>{i.name}</p>
-  //         <p>{i.surname}</p>
-  //         <p>{i.email}</p>
-  //       </StudentItem>
-  //     );
-  //   });
+  const renderStudentList = () =>
+    list.map((i: RegisterDataProps, idx: number) => {
+      return (
+        <StudentItem key={idx}>
+          <p>{i.name}</p>
+          <p>{i.surname}</p>
+          <p>{i.email}</p>
+        </StudentItem>
+      );
+    });
 
   return (
     <MainSectionComponent>
@@ -92,23 +92,61 @@ const MainSection = ({ students, setActiveNav }: AuthAndNavProps) => {
               <p>ელ ფოსტა</p>
             </StyledHeader>
           </>
-        )}
+        )} */}
         <StudentList>
           {list.length > 0 ? (
             renderStudentList()
           ) : (
             <>
-              <BalanceTitle style={{ fontSize: 18, marginTop: 50 }}>
+              <BalanceTitle style={{ fontSize: 15, marginBottom: "1rem" }}>
                 თქვენ არ დაგიმატებიათ მოსწავლის ანგარიში
               </BalanceTitle>
               <Link href={`/dashboard/student`}>
-                <StyledButton style={{ width: 400 }}>
-                  დაამატეთ აქიდან
+                <StyledButton
+                  style={{ width: "100%", fontSize: "15px", margin: 0 }}
+                >
+                  დამატება
                 </StyledButton>
               </Link>
             </>
           )}
-        </StudentList> */}
+        </StudentList>
+        <QuickTransfer>
+          <h1>სწრაფი გადარიცხვა</h1>
+          <div
+            style={{
+              display: "flex",
+              gap: "10px",
+              justifyContent: "space-between",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <img src="/icons/mastercard.svg" alt="" />
+              <BalanceTitle style={{ fontSize: "14px" }}>ბალანსი</BalanceTitle>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                textAlign: "right",
+              }}
+            >
+              <BalanceTitle style={{ fontSize: "24px" }}>₾ 800</BalanceTitle>
+              <BalanceTitle style={{ fontSize: "14px", color: "#61BB84" }}>
+                $ 266
+              </BalanceTitle>
+            </div>
+          </div>
+          <Emaunt>
+            <h1>რაოდენობა</h1>
+            <input type="text" />
+          </Emaunt>
+        </QuickTransfer>
       </Container>
     </MainSectionComponent>
   );
@@ -146,10 +184,16 @@ const ProfilePhoto = styled("img")`
   width: 50px;
   height: 50px;
 `;
-const Container = styled("div")``;
+const Container = styled("div")`
+  width: 22%;
+  background: pink;
+`;
+const QuickTransfer = styled("div")``;
+const Emaunt = styled("div")``;
 
 const Card = styled("img")`
-  width: 350px;
+  width: 120%;
+  margin-left: -29px;
   cursor: pointer;
   &:hover {
     transform: scale(1.01);
@@ -160,18 +204,19 @@ const MyCard = styled("div")`
   display: flex;
   flex-direction: column;
   width: fit-content;
+  width: 100%;
 `;
 
 const Balance = styled("div")`
   box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
-  width: 85%;
+  width: 100%;
   border-radius: 20px;
   padding: 15px;
-  margin-left: 1.5rem;
 `;
 
 const BalanceTitle = styled("h1")`
   font-size: 14px;
+  text-align: center;
   color: #798ba3;
   font-weight: 600;
   padding: 0;
@@ -180,6 +225,9 @@ const BalanceTitle = styled("h1")`
 
 const StudentList = styled("ul")`
   list-style: none;
+  width: 100%;
+  margin-top: 3rem;
+  padding: 0;
 `;
 const StudentItem = styled("li")`
   margin: 20px;
