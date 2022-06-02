@@ -146,6 +146,7 @@ const MainSection = ({ students, setActiveNav }: AuthAndNavProps) => {
             <h1>რაოდენობა</h1>
             <input type="text" />
           </Emaunt>
+          <Listing></Listing>
         </QuickTransfer>
       </Container>
     </MainSectionComponent>
@@ -190,6 +191,7 @@ const Container = styled("div")`
 `;
 const QuickTransfer = styled("div")``;
 const Emaunt = styled("div")``;
+const Listing = styled("div")``;
 
 const Card = styled("img")`
   width: 120%;
