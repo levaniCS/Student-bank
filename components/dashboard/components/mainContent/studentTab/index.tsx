@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { AuthAndNavProps } from '../../../../../utils/form.interfaces'
 import Register from '../../../../forms/register'
 
-const StudentTab = (props: AuthAndNavProps ) => {
+const StudentTab = (props: AuthAndNavProps) => {
   const [showForm, setShowForm] = useState(false)
 
   return (

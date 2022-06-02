@@ -1,18 +1,37 @@
+// @ts-ignore
 import React from 'react'
 import styled from 'styled-components'
-import { AuthAndNavProps, RegisterDataProps } from '../../../../../utils/form.interfaces';
+import { generateId } from '../../../../../context/authContext';
+import { AuthAndNavProps, RegisterDataProps, Goals } from '../../../../../utils/form.interfaces';
 import { StyledButton } from '../../../../forms/formStyles';
 
 const MainTab = ({ students, setActiveNav }: AuthAndNavProps) => {
   const { list } = students;
 
-  const renderStudentList = () => list.map((i: RegisterDataProps, idx: number) => {
+  const renderStudentList = () => list.map((i: RegisterDataProps , idx: number) => {
     return (
-      <StudentItem key={idx}>
-        <p>{i.name}</p>
-        <p>{i.surname}</p>
-        <p>{i.email}</p>
-      </StudentItem>
+      <StyledCardWrapper key={idx}>
+        <StudentItem>
+          <p>{i.name}</p>
+          <p>{i.surname}</p>
+          <p>{i.email}</p>
+        </StudentItem>
+
+
+        {i.goals && (
+          <>
+            <h6>მიზნები</h6>
+            <ol>
+              {i.goals.map((g: Goals) => (
+                  <li key={generateId()}>
+                    <div>{g.title}</div>
+                    <div>{g.description}</div>
+                  </li>
+              ))}
+            </ol>
+          </>
+        )}
+      </StyledCardWrapper>
     )
   })
 
@@ -119,19 +138,41 @@ const StudentList = styled("ul")`
 
 `
 const StudentItem = styled("li")`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`
+
+const StyledCardWrapper = styled('div')`
   margin: 20px;
   min-height: 100px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
   border-radius: 2rem;
 
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  p {
+  p, li p {
     font-size: 17px;
     color: #547cb1; 
   }
+
+  h6 {
+    padding: 1rem 8rem;
+    margin-top: 10px;
+  }
+
+  ol {
+    padding: 0rem 9rem;
+  }
+
+  div {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+  }
+  div:nth-child(2) {
+    font-size: 15px;
+    color: #65b9ce; 
+  }
+
 `
 
 const StyledHeader = styled("div")`

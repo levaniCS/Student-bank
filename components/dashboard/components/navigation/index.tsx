@@ -58,19 +58,19 @@ const Navigation = ({ status, user, setActiveNav, activeNav  } : AuthDataProps &
               <Icon src="/icons/invoice.svg" alt="" />
               <NavTitle>ინვოისი</NavTitle>
             </NavListItem>
+              <NavListItem
+                onClick={() => setActiveNav("goals")}
+                style={{
+                  background: activeNav === "goals" ? "#E5F1FF" : "#f6f8fb40",
+                }}
+              >
+                {activeNav === "goals" && <CornerLine style={{ top: "370px" }} />}
+                <Icon src="/icons/text.svg" alt="" />
+                <NavTitle>მიზნები</NavTitle>
+              </NavListItem>
+
             {isStudent && (
               <>
-                <NavListItem
-                  onClick={() => setActiveNav("goals")}
-                  style={{
-                    background: activeNav === "goals" ? "#E5F1FF" : "#f6f8fb40",
-                  }}
-                >
-                  {activeNav === "goals" && <CornerLine style={{ top: "370px" }} />}
-                  <Icon src="/icons/text.svg" alt="" />
-                  <NavTitle>მიზნები</NavTitle>
-                </NavListItem>
-
                 <NavListItem
                   onClick={() => setActiveNav("statistic")}
                   style={{
