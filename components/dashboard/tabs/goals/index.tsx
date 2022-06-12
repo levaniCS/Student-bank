@@ -51,7 +51,7 @@ const GoalsTab = (props: AuthDataProps) => {
     const studentId = student.hasOwnProperty("id") ? student.id : '123'
     props.students.addFieldToStudent(String(studentId), "goals", values);
     resetForm();
-    router.push("dashboard/main");
+    router.push({ pathname: "/dashboard/main" });
   };
 
   return (

@@ -45,7 +45,7 @@ const StudentsList = ({ students }: AuthDataProps) => {
             title={'ექშენები'}
           >
             <Dropdown.Item eventKey="1">ბალანსის შევსება</Dropdown.Item>
-            <Dropdown.Item eventKey="3" active>თანხის მოთხოვნა</Dropdown.Item>
+            <Dropdown.Item eventKey="3">თანხის მოთხოვნა</Dropdown.Item>
             <Dropdown.Item eventKey="2" onClick={() => handleAddGoal(i.id)}>მიზნის დამატება</Dropdown.Item>
           </DropdownButton>
         </StudentItem>

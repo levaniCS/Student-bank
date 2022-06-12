@@ -1,10 +1,5 @@
-import Link from "next/link";
 import styled from "styled-components";
-import {
-  AuthDataProps,
-  RegisterDataProps,
-} from "../../../../utils/form.interfaces";
-import { StyledButton } from "../../../forms/formStyles";
+import { AuthDataProps } from "../../../../utils/form.interfaces";
 import {
   Chart as ChartJS,
   BarElement,
@@ -49,11 +44,6 @@ const MainSection = (props: AuthDataProps) => {
           <Profile>
             <img style={{ width: "30px" }} src="/icons/search.svg" alt="" />
             <ProfilePhoto src="/images/profile.jpg" alt="" />
-            {status.loggedIn && (
-              <Title>{`${user.userDetails.name} - ${
-                user.userDetails.isParent ? "Parent" : "Child"
-              }`}</Title>
-            )}
           </Profile>
         </Header>
       </MainContainer>
