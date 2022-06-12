@@ -30,9 +30,13 @@ const GoalsTab = (props: AuthDataProps) => {
       handleSelect(router.query.studentId)
     }
   }, [])
+  
 
 
-  function handleSelect(studentId: string) {
+  function handleSelect(
+    eventKey: string | null,
+    e: React.SyntheticEvent<unknown>
+  ): void {
     const curr = list.find((i) => i.id === studentId);
     if (curr) {
       setStudent(curr);
@@ -62,7 +66,7 @@ const GoalsTab = (props: AuthDataProps) => {
             onSelect={handleSelect}
           >
             {list.map((i) => (
-              <Dropdown.Item eventKey={i.id || 't'}>
+              <Dropdown.Item eventKey={String(i.id!)}>
                 {i.name} {i.surname}
               </Dropdown.Item>
             ))}
