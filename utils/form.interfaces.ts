@@ -6,8 +6,8 @@ export interface AuthDataProps {
     logout: () => void;
   };
   students: {
-    list: [RegisterDataProps & { isParent: boolean }];
-    addStudent: (v: RegisterDataProps, parentId: String) => void;
+    list: [RegisterDataProps];
+    addStudent: (v: RegisterDataProps, parentId?: String) => void;
     addFieldToStudent: (
       studentId: String,
       fieldName: String,
@@ -35,14 +35,8 @@ export interface LoginDataProps {
   password: String;
 }
 
-export interface NavProps {
-  setActiveNav: (str: String) => void;
-  activeNav?: String;
-}
-
 export interface Goals {
   title: String;
   description: String;
 }
 
-export interface AuthAndNavProps extends AuthDataProps, NavProps {}

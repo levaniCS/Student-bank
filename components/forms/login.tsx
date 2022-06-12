@@ -28,7 +28,7 @@ const Login = (props: AuthDataProps) => {
     }
   
     props.status.login(values)
-    router.push('/dashboard')
+    router.push('/dashboard/main')
   };
   return (
     <StyledForm onSubmit={handleSubmit}>

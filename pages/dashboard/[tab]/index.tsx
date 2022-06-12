@@ -1,5 +1,5 @@
 import { GetStaticProps } from "next";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useRouter } from "next/dist/client/router";
 import MainSection from "../../../components/dashboard/tabs/main";
 import styled from "styled-components";
@@ -9,11 +9,10 @@ import Navigation from "../../../components/dashboard/navigation";
 import GoalsTab from "../../../components/dashboard/tabs/goals";
 
 const DashboardPage = () => {
-  const [activeNav, setActiveNav] = useState("main");
-  const ctx = useContext(AuthContext);
-
   const router = useRouter();
+  const ctx = useContext(AuthContext);
   const tab = router.query.tab;
+
 
   const renderComponent = () => {
     switch (tab) {
@@ -30,11 +29,7 @@ const DashboardPage = () => {
     <div>
       <DashboardContainer>
         <DashboardSection>
-          <Navigation
-            {...ctx}
-            setActiveNav={setActiveNav}
-            activeNav={activeNav}
-          />
+          <Navigation {...ctx} />
           {renderComponent()}
         </DashboardSection>
       </DashboardContainer>
@@ -54,12 +49,3 @@ const DashboardSection = styled("div")`
   height: 100%;
   background: #f6f8fb40;
 `;
-
-export const getServerSideProps: GetStaticProps = async ({ params }) => {
-  const tab = params?.tab ? params?.tab ?? null : null;
-  return {
-    props: {
-      tab,
-    },
-  };
-};

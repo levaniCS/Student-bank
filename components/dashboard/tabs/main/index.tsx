@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 import {
-  AuthAndNavProps,
+  AuthDataProps,
   RegisterDataProps,
 } from "../../../../utils/form.interfaces";
 import { StyledButton } from "../../../forms/formStyles";
@@ -12,18 +12,11 @@ import {
   LinearScale,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import StudentsList from "../../../studentsList";
 ChartJS.register(BarElement, CategoryScale, LinearScale);
 
-// interface Main {
-//   status?: any;
-//   user?: any;
-//   setActiveNav?: any;
-//   activeNav?: any;
-//   students?: any;
-// }
-
-const MainSection = ({ students, setActiveNav }: AuthAndNavProps) => {
-  const list = students;
+const MainSection = (props: AuthDataProps) => {
+  const list = props.students;
   const labels = [
     "January",
     "February",
@@ -46,17 +39,6 @@ const MainSection = ({ students, setActiveNav }: AuthAndNavProps) => {
       },
     },
   };
-
-  const renderStudentList = () =>
-    list.map((i: RegisterDataProps, idx: number) => {
-      return (
-        <StudentItem key={idx}>
-          <p>{i.name}</p>
-          <p>{i.surname}</p>
-          <p>{i.email}</p>
-        </StudentItem>
-      );
-    });
 
   return (
     <MainSectionComponent>
@@ -118,17 +100,6 @@ const MainSection = ({ students, setActiveNav }: AuthAndNavProps) => {
           <Currencies>
             <BalanceTitle>დოლარის კურსი $</BalanceTitle>
           </Currencies>
-          {/* სია */}
-          {/* {list.length > 0 && (
-          <>
-            <StyledTitle>მოსწავლეები</StyledTitle>
-            <StyledHeader>
-              <p>სახელი</p>
-              <p>გვარი</p>
-              <p>ელ ფოსტა</p>
-            </StyledHeader>
-          </>
-        )} */}
           <QuickTransfer>
             <H1>სწრაფი გადარიცხვა</H1>
             <div
@@ -354,34 +325,9 @@ const MainSection = ({ students, setActiveNav }: AuthAndNavProps) => {
                     },
                   ],
                 }}
-                // height={100}
-                // width={400}
               />
             </MainStat>
-            <StudentList>
-              {list.length > 0 ? (
-                renderStudentList()
-              ) : (
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexDirection: "column",
-                  }}
-                >
-                  <BalanceTitle style={{ fontSize: 15, marginBottom: "1rem" }}>
-                    თქვენ არ დაგიმატებიათ მოსწავლის ანგარიში
-                  </BalanceTitle>
-                  <Link href={`/dashboard/student`}>
-                    <StyledButton
-                      style={{ width: "50%", fontSize: "15px", margin: 0 }}
-                    >
-                      დამატება
-                    </StyledButton>
-                  </Link>
-                </div>
-              )}
-            </StudentList>
+            <StudentsList {...props} />
           </RightContainerHeader>
           <Trasnsactions>
             <TransactionHeader>

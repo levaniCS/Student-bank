@@ -1,19 +1,20 @@
 /* eslint-disable react/jsx-key */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { useRouter } from "next/router";
+
 import {
-  AuthAndNavProps,
+  AuthDataProps,
   RegisterDataProps,
 } from "../../../../utils/form.interfaces";
 
 import { useForm } from "../../../../utils/useForm";
 
-const GoalsTab = (
-  props: AuthAndNavProps & { setActiveNav?: (a: string) => void }
-) => {
+const GoalsTab = (props: AuthDataProps) => {
+  const router = useRouter()
   const [student, setStudent] = useState<RegisterDataProps | null>(null);
   const initialState: { title: String; description: String } = {
     title: "",
@@ -24,7 +25,14 @@ const GoalsTab = (
     students: { list },
   } = props;
 
-  const handleSelect = (studentId: string) => {
+  useEffect(() => {
+    if(router.query.studentId && typeof router.query.studentId === "string") {
+      handleSelect(router.query.studentId)
+    }
+  }, [])
+
+
+  function handleSelect(studentId: string) {
     const curr = list.find((i) => i.id === studentId);
     if (curr) {
       setStudent(curr);
@@ -32,12 +40,12 @@ const GoalsTab = (
   };
 
   const handleSubmit = () => {
-    console.log("Values: ", values);
-    console.log("Student: ", student);
-    if (!values.title || !values.description || !student.id) return;
-    props.students.addFieldToStudent(student.id, "goals", values);
+    if (!values.title || !values.description || student === null) return;
+
+    const studentId = student.hasOwnProperty("id") ? student.id : '123'
+    props.students.addFieldToStudent(String(studentId), "goals", values);
     resetForm();
-    props.setActiveNav && props.setActiveNav("main");
+    router.push("dashboard/main");
   };
 
   return (
@@ -54,7 +62,7 @@ const GoalsTab = (
             onSelect={handleSelect}
           >
             {list.map((i) => (
-              <Dropdown.Item eventKey={i.id}>
+              <Dropdown.Item eventKey={i.id || 't'}>
                 {i.name} {i.surname}
               </Dropdown.Item>
             ))}
