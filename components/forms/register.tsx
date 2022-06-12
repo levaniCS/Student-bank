@@ -11,7 +11,7 @@ import { useForm, validateInput } from '../../utils/useForm'
 import { AuthDataProps, RegisterDataProps } from '../../utils/form.interfaces';
 
 
-const Register = (props: AuthDataProps & { isStudentAdd?: boolean, onCancel?: () => void, setActiveNav?: (a: string) => void }) => {
+const Register = (props: AuthDataProps & { isStudentAdd?: boolean, onCancel?: () => void }) => {
   const router = useRouter()
   const initialState: Partial<RegisterDataProps> = { name: '', surname: '', email: '', password: '', passwordRepeat: '' };
   const [values, setValues] = useForm(initialState);
@@ -30,11 +30,10 @@ const Register = (props: AuthDataProps & { isStudentAdd?: boolean, onCancel?: ()
 
     if(props.isStudentAdd) {
       props.students.addStudent(values, props.user.userDetails.id)
-      props.setActiveNav && props.setActiveNav('main')
     } else {
       props.status.register(values)
-      router.push('/dashboard')
     }
+    router.push('/dashboard/main')
   };
 
   return (

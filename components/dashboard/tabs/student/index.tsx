@@ -1,21 +1,19 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { AuthAndNavProps } from "../../../../utils/form.interfaces";
+import { AuthDataProps } from "../../../../utils/form.interfaces";
 import Register from "../../../forms/register";
 
 interface Student {
   status?: any;
   user?: any;
-  setActiveNav?: any;
-  activeNav?: any;
   students?: any;
 }
 
-const Student = (props: AuthAndNavProps) => {
+const Student = (props: AuthDataProps) => {
   const [showForm, setShowForm] = useState(false);
 
   return (
-    <div>
+    <StudentWrapper>
       <StyledAddStudentContainer onClick={() => setShowForm(!showForm)}>
         მოსწავლის დამატება
       </StyledAddStudentContainer>
@@ -26,11 +24,16 @@ const Student = (props: AuthAndNavProps) => {
           onCancel={() => setShowForm(!showForm)}
         />
       )}
-    </div>
+    </StudentWrapper>
   );
 };
 
 export default Student;
+
+const StudentWrapper = styled("div")`
+  width: 100%;
+  margin: 20px 50px;
+`
 
 const StyledAddStudentContainer = styled("div")`
   /* height: 100px; */

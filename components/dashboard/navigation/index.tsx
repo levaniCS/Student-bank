@@ -1,14 +1,15 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 interface Navigation {
   status?: any;
   user?: any;
-  setActiveNav?: any;
-  activeNav?: any;
 }
 
-const Navigation = ({ status, user, setActiveNav, activeNav }: Navigation) => {
+const Navigation = ({ status, user }: Navigation) => {
+  const router = useRouter()
+  const activeNav = router.query.tab
   const isStudent = status.loggedIn && !user.userDetails.isParent;
 
   return (
@@ -20,7 +21,6 @@ const Navigation = ({ status, user, setActiveNav, activeNav }: Navigation) => {
           <NavList>
             <Link href={`/dashboard/main`} key={`dashboard`}>
               <NavListItem
-                onClick={() => setActiveNav("main")}
                 style={{
                   background: activeNav === "main" ? "#E5F1FF" : "#f6f8fb40",
                 }}
@@ -32,7 +32,6 @@ const Navigation = ({ status, user, setActiveNav, activeNav }: Navigation) => {
             </Link>
             <Link href={`/dashboard/student`} key={`student`}>
               <NavListItem
-                onClick={() => setActiveNav("student")}
                 style={{
                   background: activeNav === "student" ? "#E5F1FF" : "#f6f8fb40",
                 }}
@@ -46,7 +45,6 @@ const Navigation = ({ status, user, setActiveNav, activeNav }: Navigation) => {
             </Link>
             <Link href={`/dashboard/wallet`} key={`wallet`}>
               <NavListItem
-                onClick={() => setActiveNav("wallet")}
                 style={{
                   background: activeNav === "wallet" ? "#E5F1FF" : "#f6f8fb40",
                 }}
@@ -60,7 +58,6 @@ const Navigation = ({ status, user, setActiveNav, activeNav }: Navigation) => {
             </Link>
             <Link href={`/dashboard/invoice`} key={`invoice`}>
               <NavListItem
-                onClick={() => setActiveNav("invoice")}
                 style={{
                   background: activeNav === "invoice" ? "#E5F1FF" : "#f6f8fb40",
                 }}
@@ -75,7 +72,6 @@ const Navigation = ({ status, user, setActiveNav, activeNav }: Navigation) => {
             <>
               <Link href={`/dashboard/goals`} key={`goals`}>
                 <NavListItem
-                  onClick={() => setActiveNav("goals")}
                   style={{
                     background: activeNav === "goals" ? "#E5F1FF" : "#f6f8fb40",
                   }}
@@ -89,7 +85,6 @@ const Navigation = ({ status, user, setActiveNav, activeNav }: Navigation) => {
               </Link>
               <Link href={`/dashboard/statistic`} key={`statistic`}>
                 <NavListItem
-                  onClick={() => setActiveNav("statistic")}
                   style={{
                     background:
                       activeNav === "statistic" ? "#E5F1FF" : "#f6f8fb40",
@@ -108,7 +103,6 @@ const Navigation = ({ status, user, setActiveNav, activeNav }: Navigation) => {
           <NavList>
             <Link href={`/dashboard/help`} key={`help`}>
               <NavListItem
-                onClick={() => setActiveNav("help")}
                 style={{
                   background: activeNav === "help" ? "#E5F1FF" : "#f6f8fb40",
                 }}
@@ -122,7 +116,6 @@ const Navigation = ({ status, user, setActiveNav, activeNav }: Navigation) => {
             </Link>
             <Link href={`/dashboard/parameter`} key={`parameter`}>
               <NavListItem
-                onClick={() => setActiveNav("parameter")}
                 style={{
                   background:
                     activeNav === "parameter" ? "#E5F1FF" : "#f6f8fb40",
