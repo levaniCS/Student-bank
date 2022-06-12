@@ -13,7 +13,7 @@ import {
 const GoalsList = ({ students }: AuthDataProps) => {
   const router = useRouter()
 
-  const studentsWithGoals = students.list.map((st: RegisterDataProps) => {
+  const studentsWithGoals = students.list.filter((st: RegisterDataProps) => {
     if(st.goals && st.goals.length > 0) {
       return st
     }
@@ -24,11 +24,11 @@ const GoalsList = ({ students }: AuthDataProps) => {
   
   const renderGoalsList = () =>
     studentsWithGoals.map((st: RegisterDataProps) => {
-      const renderGoals = st.goals?.map((g: Goals) => (
-        <GoalItem key={g.description}>
+      const renderGoals = st.goals ? st.goals.map((g: Goals) => (
+        <GoalItem key={String(g.description)}>
           <p>{`${st.name} ${st.surname}`}</p>
           <p>{g.title}</p>
-          <p>{g.description}</p>
+          <p style={{ maxWidth: 200 }}>{g.description}</p>
           <DropdownButton
             as={ButtonGroup}
             key={'Success'}
@@ -37,12 +37,11 @@ const GoalsList = ({ students }: AuthDataProps) => {
             title={'ექშენები'}
           >
             <Dropdown.Item eventKey="1">წაშლა</Dropdown.Item>
-            <Dropdown.Item eventKey="3" active>ედითი</Dropdown.Item>
+            <Dropdown.Item eventKey="3">ედითი</Dropdown.Item>
             <Dropdown.Item eventKey="2">შესრულებულად მონიშვნა</Dropdown.Item>
           </DropdownButton>
         </GoalItem>
-      ))
-
+      )) : null
 
       return renderGoals
     });
@@ -57,7 +56,7 @@ const GoalsList = ({ students }: AuthDataProps) => {
     <StudentList>
       <>
         <HeaderWrapper>
-          <StyledTitle>Goals</StyledTitle>
+          <StyledTitle>მიზნები</StyledTitle>
           <StyledHeader>
             <p>სტუდენტი</p>
             <p>სათაური</p>
