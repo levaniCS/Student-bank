@@ -13,6 +13,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import StudentsList from "../../../studentsList";
+import GoalsList from "../../../goalsList";
 ChartJS.register(BarElement, CategoryScale, LinearScale);
 
 const MainSection = (props: AuthDataProps) => {
@@ -48,11 +49,11 @@ const MainSection = (props: AuthDataProps) => {
           <Profile>
             <img style={{ width: "30px" }} src="/icons/search.svg" alt="" />
             <ProfilePhoto src="/images/profile.jpg" alt="" />
-            {/* {status.loggedIn && (
+            {status.loggedIn && (
               <Title>{`${user.userDetails.name} - ${
                 user.userDetails.isParent ? "Parent" : "Child"
               }`}</Title>
-            )} */}
+            )}
           </Profile>
         </Header>
       </MainContainer>
@@ -408,6 +409,7 @@ const MainSection = (props: AuthDataProps) => {
               </TrasnsactionItem>
             </TrasnsactionsMain>
           </Trasnsactions>
+          <GoalsList {...props} />
         </RigthContainer>
       </Container>
     </MainSectionComponent>

@@ -4,6 +4,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import styled from "styled-components"
 import { useRouter } from "next/router";
 
 import {
@@ -12,6 +13,7 @@ import {
 } from "../../../../utils/form.interfaces";
 
 import { useForm } from "../../../../utils/useForm";
+import GoalsList from "../../../goalsList";
 
 const GoalsTab = (props: AuthDataProps) => {
   const router = useRouter()
@@ -53,7 +55,8 @@ const GoalsTab = (props: AuthDataProps) => {
   };
 
   return (
-    <div>
+    <div style={{ width: '100%', margin: '30px 50px' }}>
+      <GoalsList {...props} />
       {list.length > 0 ? (
         <>
           <DropdownButton
@@ -107,10 +110,16 @@ const GoalsTab = (props: AuthDataProps) => {
           )}
         </>
       ) : (
-        <p>იმისათვის რომ შეძლოთ მიზნის დამატება ჯერ უნდა დაამატოთ მოსწავლე</p>
+        <StyledMessage>იმისათვის რომ შეძლოთ მიზნის დამატება ჯერ უნდა დაამატოთ მოსწავლე!</StyledMessage>
       )}
     </div>
   );
 };
+
+
+const StyledMessage = styled("p")`
+  font-size: 20px;
+  color: #819cfd;
+`
 
 export default GoalsTab;
