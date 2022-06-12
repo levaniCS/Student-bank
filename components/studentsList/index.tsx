@@ -17,11 +17,17 @@ const StudentsList = ({ students }: AuthDataProps) => {
   const list = students.list;
 
 
-  const handleAddGoal = (studentId: string) => {
-    router.push({
+  const handleAddGoal = (studentId: String | undefined) => {
+    let pushObj = {
       pathname: '/dashboard/goals',
-      query: { studentId: studentId }
-    })
+      query: {}
+    }
+
+    if(studentId) {
+      pushObj.query = { studentId: studentId }
+    }
+  
+    router.push(pushObj)
   }
   
   const renderStudentList = () =>
