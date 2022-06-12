@@ -27,13 +27,17 @@ const GoalsTab = (props: AuthDataProps) => {
 
   useEffect(() => {
     if(router.query.studentId && typeof router.query.studentId === "string") {
-      handleSelect(router.query.studentId)
+      const curr = list.find((i) => i.id === router.query.studentId);
+      if (curr) {
+        setStudent(curr);
+      }
     }
   }, [])
+  
 
 
-  function handleSelect(studentId: string) {
-    const curr = list.find((i) => i.id === studentId);
+  function handleSelect(eventKey: string | null): void {
+    const curr = list.find((i) => i.id === eventKey);
     if (curr) {
       setStudent(curr);
     }
@@ -59,10 +63,10 @@ const GoalsTab = (props: AuthDataProps) => {
                 : "აირჩიეთ მოსწავლე მიზნის დასამატებლად"
             }
             id="dropdown-menu-align-right"
-            onSelect={handleSelect}
+            onSelect={(eventKey: string | null, e: React.SyntheticEvent<unknown, Event>) => handleSelect(eventKey)}
           >
             {list.map((i) => (
-              <Dropdown.Item eventKey={i.id || 't'}>
+              <Dropdown.Item eventKey={String(i.id!)}>
                 {i.name} {i.surname}
               </Dropdown.Item>
             ))}
