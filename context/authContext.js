@@ -1,6 +1,7 @@
 import { useState, createContext } from "react";
-
 export const AuthContext = createContext();
+
+export const generateId = () => (Math.random() + 1).toString(36).substring(7)
 
 const AuthProvider = ({ children }) => {
     const [ loggedIn, setLoggedIn ] = useState(false);
@@ -18,21 +19,27 @@ const AuthProvider = ({ children }) => {
 
     const register = values => {
         setLoggedIn(true);
-        setUserDetails({
-            ...values,
-            isParent: true
-        });
+        const data = { ...values, isParent: true, id: generateId() }
+        setUserDetails(data);
     }
 
     
-    const addStudent = values => {
-        console.log('students', students)
+    const addStudent = (values, parentId) => {
         const oldStudents = [...students]
-        const newStudent = {...values, isParent: false}
+        const data = {...values, isParent: false, parentId, id: generateId() }
+        setStudents([...oldStudents, data]);
+    }
 
-        setStudents([
-            ...oldStudents, newStudent
-        ]);
+
+    const addFieldToStudent = (studentId, fieldName, data) => {
+        const curr = students.find(i => i.id === studentId)
+        curr[fieldName] = curr[fieldName] ? [...curr[fieldName], data] : [data]
+
+        const idx = students.findIndex(i => i.id === studentId)
+        let studentsClone = [...students]
+        studentsClone[idx] = curr
+
+        setStudents([...studentsClone])
     }
 
     const logout = () => {
@@ -45,11 +52,12 @@ const AuthProvider = ({ children }) => {
             loggedIn,
             login,
             logout,
-            register
+            register,
         },
         students: {
             addStudent,
-            list: students
+            addFieldToStudent,
+            list: students,
         },
         user: {
             userDetails,

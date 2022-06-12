@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { AuthContext } from "../../../context/authContext";
 import Student from "../../../components/dashboard/tabs/student";
 import Navigation from "../../../components/dashboard/navigation";
+import GoalsTab from "../../../components/dashboard/tabs/goals";
 
 const DashboardPage = () => {
   const [activeNav, setActiveNav] = useState("main");
@@ -20,6 +21,8 @@ const DashboardPage = () => {
         return <MainSection {...ctx} />;
       case "student":
         return <Student {...ctx} />;
+      case "goals":
+        return <GoalsTab {...ctx} />;
     }
   };
 

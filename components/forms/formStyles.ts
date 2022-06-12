@@ -30,6 +30,23 @@ export const StyledInput = styled.input`
   }
 `
 
+export const StyledTextArea = styled.textarea`
+  font-size: 20px;
+  margin: 5px 0;
+  width: 100%;
+  display: block;
+  padding: 15px;
+  border-radius: 1rem;
+  border: none;
+  background-color: #f2f3f4;
+
+  box-shadow: 0 1rem 2rem rgba(#000, 0.2);
+
+  &:focus {
+    outline: none;
+  }
+`
+
 export const StyledButton = styled.button`
   width: 100%;
   background: blue;
