@@ -36,10 +36,7 @@ const GoalsTab = (props: AuthDataProps) => {
   
 
 
-  function handleSelect(
-    eventKey: string | undefined,
-    e: React.SyntheticEvent<unknown>
-  ): void {
+  function handleSelect(eventKey: string | null): void {
     const curr = list.find((i) => i.id === eventKey);
     if (curr) {
       setStudent(curr);
@@ -66,7 +63,7 @@ const GoalsTab = (props: AuthDataProps) => {
                 : "აირჩიეთ მოსწავლე მიზნის დასამატებლად"
             }
             id="dropdown-menu-align-right"
-            onSelect={handleSelect}
+            onSelect={(eventKey: string | null, e: React.SyntheticEvent<unknown, Event>) => handleSelect(eventKey)}
           >
             {list.map((i) => (
               <Dropdown.Item eventKey={String(i.id!)}>
