@@ -27,17 +27,20 @@ const GoalsTab = (props: AuthDataProps) => {
 
   useEffect(() => {
     if(router.query.studentId && typeof router.query.studentId === "string") {
-      handleSelect(router.query.studentId)
+      const curr = list.find((i) => i.id === router.query.studentId);
+      if (curr) {
+        setStudent(curr);
+      }
     }
   }, [])
   
 
 
   function handleSelect(
-    eventKey: string | null,
+    eventKey: string | undefined,
     e: React.SyntheticEvent<unknown>
   ): void {
-    const curr = list.find((i) => i.id === studentId);
+    const curr = list.find((i) => i.id === eventKey);
     if (curr) {
       setStudent(curr);
     }
