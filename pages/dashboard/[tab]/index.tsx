@@ -7,12 +7,12 @@ import { AuthContext } from "../../../context/authContext";
 import Student from "../../../components/dashboard/tabs/student";
 import Navigation from "../../../components/dashboard/navigation";
 import GoalsTab from "../../../components/dashboard/tabs/goals";
+import Wallet from "../../../components/dashboard/tabs/wallet";
 
 const DashboardPage = () => {
   const router = useRouter();
   const ctx = useContext(AuthContext);
   const tab = router.query.tab;
-
 
   const renderComponent = () => {
     switch (tab) {
@@ -22,6 +22,8 @@ const DashboardPage = () => {
         return <Student {...ctx} />;
       case "goals":
         return <GoalsTab {...ctx} />;
+      case "wallet":
+        return <Wallet {...ctx} />;
     }
   };
 

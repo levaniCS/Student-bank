@@ -38,26 +38,72 @@ const MainSection = (props: AuthDataProps) => {
 
   return (
     <MainSectionComponent>
-      <MainContainer>
-        <Header>
-          <Title>მთავარი</Title>
-          <Profile>
-            <img style={{ width: "30px" }} src="/icons/search.svg" alt="" />
-            <ProfilePhoto src="/images/profile.jpg" alt="" />
-          </Profile>
-        </Header>
-      </MainContainer>
-      <Container>
-        <LeftContainer>
-          {" "}
-          <MyCard>
-            <Card src="/images/card.png" alt="" />
-            <Balance>
+      <MainInner>
+        <MainContainer>
+          <Header>
+            <Title>მთავარი</Title>
+            <Profile>
+              <img style={{ width: "30px" }} src="/icons/search.svg" alt="" />
+              <ProfilePhoto src="/images/profile.jpg" alt="" />
+            </Profile>
+          </Header>
+        </MainContainer>
+        <Container>
+          <LeftContainer>
+            {" "}
+            <MyCard>
+              <Card src="/images/card.png" alt="" />
+              <Balance>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img src="/icons/mastercard.svg" alt="" />
+                    <BalanceTitle style={{ fontSize: "14px" }}>
+                      ბალანსი
+                    </BalanceTitle>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      textAlign: "right",
+                    }}
+                  >
+                    <BalanceTitle style={{ fontSize: "24px" }}>
+                      ₾ 800
+                    </BalanceTitle>
+                    <BalanceTitle
+                      style={{ fontSize: "14px", color: "#61BB84" }}
+                    >
+                      $ 266
+                    </BalanceTitle>
+                  </div>
+                </div>
+              </Balance>
+            </MyCard>
+            <Currencies>
+              <BalanceTitle>დოლარის კურსი $</BalanceTitle>
+            </Currencies>
+            <QuickTransfer>
+              <H1>სწრაფი გადარიცხვა</H1>
               <div
                 style={{
                   display: "flex",
                   gap: "10px",
                   justifyContent: "space-between",
+                  border: "1px solid #F6F8FB",
+                  borderRadius: "10px",
+                  padding: "5px",
                 }}
               >
                 <div
@@ -67,9 +113,7 @@ const MainSection = (props: AuthDataProps) => {
                   }}
                 >
                   <img src="/icons/mastercard.svg" alt="" />
-                  <BalanceTitle style={{ fontSize: "14px" }}>
-                    ბალანსი
-                  </BalanceTitle>
+                  <BalanceTitle style={{ fontSize: "14px" }}>GGB</BalanceTitle>
                 </div>
                 <div
                   style={{
@@ -81,327 +125,297 @@ const MainSection = (props: AuthDataProps) => {
                   <BalanceTitle style={{ fontSize: "24px" }}>
                     ₾ 800
                   </BalanceTitle>
-                  <BalanceTitle style={{ fontSize: "14px", color: "#61BB84" }}>
-                    $ 266
-                  </BalanceTitle>
                 </div>
               </div>
-            </Balance>
-          </MyCard>
-          <Currencies>
-            <BalanceTitle>დოლარის კურსი $</BalanceTitle>
-          </Currencies>
-          <QuickTransfer>
-            <H1>სწრაფი გადარიცხვა</H1>
-            <div
-              style={{
-                display: "flex",
-                gap: "10px",
-                justifyContent: "space-between",
-                border: "1px solid #F6F8FB",
-                borderRadius: "10px",
-                padding: "5px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <img src="/icons/mastercard.svg" alt="" />
-                <BalanceTitle style={{ fontSize: "14px" }}>GGB</BalanceTitle>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  textAlign: "right",
-                }}
-              >
-                <BalanceTitle style={{ fontSize: "24px" }}>₾ 800</BalanceTitle>
-              </div>
-            </div>
-            <Emaunt>
-              <h1
-                style={{
-                  padding: 0,
-                  margin: 0,
-                  fontSize: "14px",
-                  color: "#A8B1BF",
-                }}
-              >
-                რაოდენობა
-              </h1>
-              <div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  gap: "10px",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Input type="text" placeholder="თანხა" />
-                <img
-                  style={{ width: "25px" }}
-                  src="/icons/recieve.svg"
-                  alt=""
-                />
-              </div>
-            </Emaunt>
-            <IconsSections>
-              <IconsItemDiv>
-                <IconsItem>
-                  <img style={{ width: "25px" }} src="/icons/send.svg" alt="" />
-                </IconsItem>
+              <Emaunt>
                 <h1
                   style={{
                     padding: 0,
                     margin: 0,
-                    fontSize: "12px",
+                    fontSize: "14px",
                     color: "#A8B1BF",
                   }}
                 >
-                  გაგზავნა
+                  რაოდენობა
                 </h1>
-              </IconsItemDiv>
-              <IconsItemDiv>
-                <IconsItem>
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    gap: "10px",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Input type="text" placeholder="თანხა" />
                   <img
                     style={{ width: "25px" }}
                     src="/icons/recieve.svg"
                     alt=""
                   />
-                </IconsItem>
-                <h1
-                  style={{
-                    padding: 0,
-                    margin: 0,
-                    fontSize: "12px",
-                    color: "#A8B1BF",
-                  }}
-                >
-                  მიღება
-                </h1>
-              </IconsItemDiv>
-              <IconsItemDiv>
-                <IconsItem>
-                  <img
-                    style={{ width: "25px" }}
-                    src="/icons/invoicing.svg"
-                    alt=""
-                  />
-                </IconsItem>
-                <h1
-                  style={{
-                    padding: 0,
-                    margin: 0,
-                    fontSize: "12px",
-                    color: "#A8B1BF",
-                  }}
-                >
-                  ინვოისი
-                </h1>
-              </IconsItemDiv>
-              <IconsItemDiv>
-                <IconsItem>
-                  <img style={{ width: "25px" }} src="/icons/more.svg" alt="" />
-                </IconsItem>
-                <h1
-                  style={{
-                    padding: 0,
-                    margin: 0,
-                    fontSize: "12px",
-                    color: "#A8B1BF",
-                  }}
-                >
-                  სხვა
-                </h1>
-              </IconsItemDiv>
-            </IconsSections>
-          </QuickTransfer>
-        </LeftContainer>
-        <RigthContainer>
-          <RightContainerHeader>
-            <MainStat>
-              <div
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  justifyContent: "space-between",
-                }}
-              >
-                <h1
-                  style={{
-                    padding: 0,
-                    margin: 0,
-                    fontSize: "18px",
-                    color: "#141736",
-                    marginBottom: "1rem",
-                  }}
-                >
-                  ბოლო კვირის სტატისტიკა
-                </h1>
+                </div>
+              </Emaunt>
+              <IconsSections>
+                <IconsItemDiv>
+                  <IconsItem>
+                    <img
+                      style={{ width: "25px" }}
+                      src="/icons/send.svg"
+                      alt=""
+                    />
+                  </IconsItem>
+                  <h1
+                    style={{
+                      padding: 0,
+                      margin: 0,
+                      fontSize: "12px",
+                      color: "#A8B1BF",
+                    }}
+                  >
+                    გაგზავნა
+                  </h1>
+                </IconsItemDiv>
+                <IconsItemDiv>
+                  <IconsItem>
+                    <img
+                      style={{ width: "25px" }}
+                      src="/icons/recieve.svg"
+                      alt=""
+                    />
+                  </IconsItem>
+                  <h1
+                    style={{
+                      padding: 0,
+                      margin: 0,
+                      fontSize: "12px",
+                      color: "#A8B1BF",
+                    }}
+                  >
+                    მიღება
+                  </h1>
+                </IconsItemDiv>
+                <IconsItemDiv>
+                  <IconsItem>
+                    <img
+                      style={{ width: "25px" }}
+                      src="/icons/invoicing.svg"
+                      alt=""
+                    />
+                  </IconsItem>
+                  <h1
+                    style={{
+                      padding: 0,
+                      margin: 0,
+                      fontSize: "12px",
+                      color: "#A8B1BF",
+                    }}
+                  >
+                    ინვოისი
+                  </h1>
+                </IconsItemDiv>
+                <IconsItemDiv>
+                  <IconsItem>
+                    <img
+                      style={{ width: "25px" }}
+                      src="/icons/more.svg"
+                      alt=""
+                    />
+                  </IconsItem>
+                  <h1
+                    style={{
+                      padding: 0,
+                      margin: 0,
+                      fontSize: "12px",
+                      color: "#A8B1BF",
+                    }}
+                  >
+                    სხვა
+                  </h1>
+                </IconsItemDiv>
+              </IconsSections>
+            </QuickTransfer>
+          </LeftContainer>
+          <RigthContainer>
+            <RightContainerHeader>
+              <MainStat>
                 <div
                   style={{
                     display: "flex",
-                    gap: "10px",
+                    width: "100%",
+                    justifyContent: "space-between",
                   }}
                 >
                   <h1
                     style={{
                       padding: 0,
                       margin: 0,
-                      fontSize: "12px",
-                      color: "#A789FF",
+                      fontSize: "18px",
+                      color: "#141736",
                       marginBottom: "1rem",
                     }}
                   >
-                    გასავალი
+                    ბოლო კვირის სტატისტიკა
                   </h1>
-                  <h1
+                  <div
                     style={{
-                      padding: 0,
-                      margin: 0,
-                      fontSize: "12px",
-                      color: "#83DEA4",
-                      marginBottom: "1rem",
+                      display: "flex",
+                      gap: "10px",
                     }}
                   >
-                    შემოსავალი
-                  </h1>
+                    <h1
+                      style={{
+                        padding: 0,
+                        margin: 0,
+                        fontSize: "12px",
+                        color: "#A789FF",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      გასავალი
+                    </h1>
+                    <h1
+                      style={{
+                        padding: 0,
+                        margin: 0,
+                        fontSize: "12px",
+                        color: "#83DEA4",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      შემოსავალი
+                    </h1>
+                  </div>
                 </div>
-              </div>
-              <Bar
-                options={{
-                  responsive: true,
-                  plugins: {
-                    legend: {
-                      display: true,
-                      labels: {
-                        color: "rgb(255, 99, 132)",
+                <Bar
+                  options={{
+                    responsive: true,
+                    plugins: {
+                      legend: {
+                        display: true,
+                        labels: {
+                          color: "rgb(255, 99, 132)",
+                        },
+                      },
+                      title: {
+                        display: false,
+                        text: "Chart.js Bar Chart",
                       },
                     },
-                    title: {
-                      display: false,
-                      text: "Chart.js Bar Chart",
-                    },
-                  },
-                }}
-                style={{ width: "600px" }}
-                data={{
-                  labels: [
-                    "3 ივნისი",
-                    "4 ივნისი",
-                    "5 ივნისი",
-                    "6 ივნისი",
-                    "7 ივნისი",
-                    "8 ივნისი",
-                    "9 ივნისი",
-                  ],
-                  datasets: [
-                    {
-                      label: "# of Votes",
-                      data: [120, 190, 33, 50, 20, 30, 70],
-                      backgroundColor: ["rgb(167, 137, 255)"],
-                      borderColor: ["#A789FF"],
-                      borderWidth: 1,
-                    },
-                    {
-                      label: "# of Votes",
-                      data: [200, 10, 80, 55, 70, 60, 130],
-                      backgroundColor: ["rgb(131, 222, 164,0.6)"],
-                      borderColor: ["#83DEA4"],
-                      borderWidth: 1,
-                    },
-                  ],
-                }}
-              />
-            </MainStat>
-            <StudentsList {...props} />
-          </RightContainerHeader>
-          <Trasnsactions>
-            <TransactionHeader>
-              <h1
-                style={{
-                  padding: 0,
-                  margin: 0,
-                  fontSize: "12px",
-                  color: "#A8B1BF",
-                }}
-              >
-                უახლოესი ტრანზაქციები
-              </h1>
-              <h1
-                style={{
-                  padding: 0,
-                  margin: 0,
-                  fontSize: "12px",
-                  color: "#A8B1BF",
-                }}
-              >
-                ყველას ნახვა
-              </h1>
-            </TransactionHeader>
-            <TrasnsactionsMain>
-              <TrasnsactionItem>
-                <div
+                  }}
+                  style={{ width: "600px" }}
+                  data={{
+                    labels: [
+                      "3 ივნისი",
+                      "4 ივნისი",
+                      "5 ივნისი",
+                      "6 ივნისი",
+                      "7 ივნისი",
+                      "8 ივნისი",
+                      "9 ივნისი",
+                    ],
+                    datasets: [
+                      {
+                        label: "# of Votes",
+                        data: [120, 190, 33, 50, 20, 30, 70],
+                        backgroundColor: ["rgb(167, 137, 255)"],
+                        borderColor: ["#A789FF"],
+                        borderWidth: 1,
+                      },
+                      {
+                        label: "# of Votes",
+                        data: [200, 10, 80, 55, 70, 60, 130],
+                        backgroundColor: ["rgb(131, 222, 164,0.6)"],
+                        borderColor: ["#83DEA4"],
+                        borderWidth: 1,
+                      },
+                    ],
+                  }}
+                />
+              </MainStat>
+              <StudentsList {...props} />
+            </RightContainerHeader>
+            <Trasnsactions>
+              <TransactionHeader>
+                <h1
                   style={{
-                    width: "220px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
+                    padding: 0,
+                    margin: 0,
+                    fontSize: "12px",
+                    color: "#A8B1BF",
                   }}
                 >
-                  <img src="/images/bitcoin.png" alt="" />
-                  <TrasnsactionDetails>
-                    გადარიცხვა ბიტკოინზე
-                  </TrasnsactionDetails>
-                </div>
-                <TrasnsactionDetails>12 ივნ, 2022</TrasnsactionDetails>
-                <TrasnsactionDetails>*****342323</TrasnsactionDetails>
-                <TrasnsactionDetails>-800$</TrasnsactionDetails>
-                <AStatus>წარმატებული</AStatus>
-              </TrasnsactionItem>
-              <TrasnsactionItem>
-                <div
+                  უახლოესი ტრანზაქციები
+                </h1>
+                <h1
                   style={{
-                    width: "220px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
+                    padding: 0,
+                    margin: 0,
+                    fontSize: "12px",
+                    color: "#A8B1BF",
                   }}
                 >
-                  <img src="/images/girl.png" alt="" />
-                  <TrasnsactionDetails>შვილზე გადარიცხვა</TrasnsactionDetails>
-                </div>
-                <TrasnsactionDetails>2 ივნ, 2022</TrasnsactionDetails>
-                <TrasnsactionDetails>*****342323</TrasnsactionDetails>
-                <TrasnsactionDetails>-100$</TrasnsactionDetails>
-                <AStatus>წარმატებული</AStatus>
-              </TrasnsactionItem>
-              <TrasnsactionItem>
-                <div
-                  style={{
-                    width: "220px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                  }}
-                >
-                  <img src="/images/pay.png" alt="" />
-                  <TrasnsactionDetails>გარეშე გადარიცხვა</TrasnsactionDetails>
-                </div>
-                <TrasnsactionDetails>12 ივნ, 2022</TrasnsactionDetails>
-                <TrasnsactionDetails>*****342323</TrasnsactionDetails>
-                <TrasnsactionDetails>-800$</TrasnsactionDetails>
-                <AStatus>წარმატებული</AStatus>
-              </TrasnsactionItem>
-            </TrasnsactionsMain>
-          </Trasnsactions>
-          <GoalsList {...props} />
-        </RigthContainer>
-      </Container>
+                  ყველას ნახვა
+                </h1>
+              </TransactionHeader>
+              <TrasnsactionsMain>
+                <TrasnsactionItem>
+                  <div
+                    style={{
+                      width: "220px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    <img src="/images/bitcoin.png" alt="" />
+                    <TrasnsactionDetails>
+                      გადარიცხვა ბიტკოინზე
+                    </TrasnsactionDetails>
+                  </div>
+                  <TrasnsactionDetails>12 ივნ, 2022</TrasnsactionDetails>
+                  <TrasnsactionDetails>*****342323</TrasnsactionDetails>
+                  <TrasnsactionDetails>-800$</TrasnsactionDetails>
+                  <AStatus>წარმატებული</AStatus>
+                </TrasnsactionItem>
+                <TrasnsactionItem>
+                  <div
+                    style={{
+                      width: "220px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    <img src="/images/girl.png" alt="" />
+                    <TrasnsactionDetails>შვილზე გადარიცხვა</TrasnsactionDetails>
+                  </div>
+                  <TrasnsactionDetails>2 ივნ, 2022</TrasnsactionDetails>
+                  <TrasnsactionDetails>*****342323</TrasnsactionDetails>
+                  <TrasnsactionDetails>-100$</TrasnsactionDetails>
+                  <AStatus>წარმატებული</AStatus>
+                </TrasnsactionItem>
+                <TrasnsactionItem>
+                  <div
+                    style={{
+                      width: "220px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    <img src="/images/pay.png" alt="" />
+                    <TrasnsactionDetails>გარეშე გადარიცხვა</TrasnsactionDetails>
+                  </div>
+                  <TrasnsactionDetails>12 ივნ, 2022</TrasnsactionDetails>
+                  <TrasnsactionDetails>*****342323</TrasnsactionDetails>
+                  <TrasnsactionDetails>-800$</TrasnsactionDetails>
+                  <AStatus>წარმატებული</AStatus>
+                </TrasnsactionItem>
+              </TrasnsactionsMain>
+            </Trasnsactions>
+            <GoalsList {...props} />
+          </RigthContainer>
+        </Container>
+      </MainInner>
     </MainSectionComponent>
   );
 };
@@ -409,12 +423,19 @@ const MainSection = (props: AuthDataProps) => {
 export default MainSection;
 
 const MainSectionComponent = styled("div")`
-  width: 86%;
-  height: 95%;
-  margin: 1rem;
+  width: 100%;
+  height: 100%;
+  /* margin: 1rem; */
+  background-image: url("/images/back.png");
+  background-size: cover;
 `;
 const MainContainer = styled("div")`
   width: 100%;
+`;
+const MainInner = styled("div")`
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
 `;
 
 const Header = styled("div")`
@@ -440,9 +461,9 @@ const ProfilePhoto = styled("img")`
 `;
 const Container = styled("div")`
   display: flex;
-  gap: 1rem;
   width: 100%;
   height: 96%;
+  gap: 1rem;
 `;
 const QuickTransfer = styled("div")`
   border: 1px solid #e8e8e8;
@@ -451,6 +472,7 @@ const QuickTransfer = styled("div")`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  background: white;
 `;
 const Emaunt = styled("div")`
   border-radius: 10px;
@@ -491,16 +513,24 @@ const LeftContainer = styled("div")`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 96%;
+  height: 98%;
+  border-radius: 10px;
+  padding: 20px;
+  background: #ffffff36;
 `;
 
 const RigthContainer = styled("div")`
   padding: 1.8rem 2rem;
   width: 100%;
+  background: #ffffff36;
+  height: 98%;
+  border-radius: 10px;
+  padding: 20px;
 `;
 const RightContainerHeader = styled("div")`
   display: flex;
   gap: 2rem;
+  border-radius: 13px;
 `;
 const Trasnsactions = styled("div")`
   width: 100%;
@@ -511,6 +541,7 @@ const Trasnsactions = styled("div")`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  background: white;
 `;
 const TransactionHeader = styled("div")`
   width: 100%;
@@ -572,6 +603,7 @@ const Balance = styled("div")`
   width: 100%;
   border-radius: 20px;
   padding: 15px;
+  background: white;
 `;
 
 const BalanceTitle = styled("h1")`
@@ -642,10 +674,12 @@ const MainStat = styled("div")`
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
   width: 50%;
+  background: white;
 `;
 
 const Currencies = styled("div")`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
   padding: 1rem;
   border-radius: 1rem;
+  background: white;
 `;
