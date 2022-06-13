@@ -31,9 +31,18 @@ const AuthProvider = ({ children }) => {
     }
 
 
-    const addFieldToStudent = (studentId, fieldName, data) => {
+    const addFieldToStudent = (studentId, fieldName, data, goalId = null) => {
         const curr = students.find(i => i.id === studentId)
-        curr[fieldName] = curr[fieldName] ? [...curr[fieldName], data] : [data]
+
+        if(!goalId) {
+            curr[fieldName] = curr[fieldName] ? [...curr[fieldName], {...data, id: generateId() }] : [{...data, id: generateId()}]
+        } else {
+            const goalIndex = curr[fieldName].findIndex(i => i.id === goalId)
+            if(goalIndex !== -1) {
+                curr[fieldName][goalIndex] = {...curr[fieldName][goalIndex], ...data}
+            }
+        }
+        
 
         const idx = students.findIndex(i => i.id === studentId)
         let studentsClone = [...students]
@@ -47,6 +56,40 @@ const AuthProvider = ({ children }) => {
         setUserDetails([]);
     }
 
+
+    const deleteGoalToStudent = (studentId, goalId) => {
+        const curr = students.find(i => i.id === studentId)
+        if(curr) {
+            let goals = [...curr.goals]
+            goals = goals.filter(g => g.id !== goalId)
+            curr['goals'] = goals
+        }
+
+
+        const idx = students.findIndex(i => i.id === studentId)
+        let studentsClone = [...students]
+        studentsClone[idx] = curr
+        setStudents([...studentsClone])
+    }
+
+    const markGoalAsDoneToStudent = (studentId, goalId) => {
+        const curr = students.find(i => i.id === studentId)
+        if(curr) {
+            let goals = [...curr.goals]
+            const goalIdx = goals.findIndex(i => i.id === goalId)
+            goals[goalIdx] = {...goals[goalIdx], isDone: true }
+            curr['goals'] = goals
+
+        }
+
+
+        const idx = students.findIndex(i => i.id === studentId)
+        let studentsClone = [...students]
+        studentsClone[idx] = curr
+        setStudents([...studentsClone])
+        
+    }
+
     const contextValue = {
         status: {
             loggedIn,
@@ -58,6 +101,8 @@ const AuthProvider = ({ children }) => {
             addStudent,
             addFieldToStudent,
             list: students,
+            deleteGoalToStudent,
+            markGoalAsDoneToStudent
         },
         user: {
             userDetails,
