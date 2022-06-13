@@ -433,9 +433,80 @@ const Wallet = (props: Wallet) => {
           </CardInfo>
         </CardSection>
         <Students>
-          <Currencies>
-            <BalanceTitle>დოლარის კურსი $</BalanceTitle>
-          </Currencies>
+          <Profile>
+            <FlexContainer>
+              <img src="/images/user.png" alt="" />
+              <FlexContainer
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginLeft: "1rem",
+                  gap: "5px",
+                }}
+              >
+                <Title1
+                  style={{
+                    fontSize: "14px",
+                    padding: "0",
+                    cursor: "pointer",
+                    color: "black",
+                  }}
+                >
+                  გიორგი ქებურია
+                </Title1>
+
+                <Title1
+                  style={{
+                    fontSize: "12px",
+                    padding: "0",
+                    cursor: "pointer",
+                    color: "gray",
+                  }}
+                >
+                  Giorgikeburia1@gmail.com
+                </Title1>
+              </FlexContainer>
+            </FlexContainer>
+            <img src="/icons/dropDown.svg" alt="" />
+          </Profile>
+          <BalanceCont>
+            <Title1
+              style={{
+                fontSize: "18px",
+                color: "black",
+                cursor: "pointer",
+              }}
+            >
+              ბალანსი
+            </Title1>
+            <Title1
+              style={{
+                fontSize: "36px",
+                color: "black",
+                cursor: "pointer",
+              }}
+            >
+              $32 000
+            </Title1>
+            <FlexContainer style={{ alignItems: "center", gap: "12px" }}>
+              <img src="/icons/stat-up.svg" alt="" />
+              <Title1
+                style={{
+                  padding: "0",
+                  fontSize: "0.9rem",
+                  color: "#1E2029",
+                }}
+              >
+                12%
+              </Title1>
+            </FlexContainer>
+          </BalanceCont>
+          <FlexContainer
+            style={{ gap: "1rem", justifyContent: "center", marginTop: "1rem" }}
+          >
+            <BlackButton>Send</BlackButton>
+            <BlackButton>Receive</BlackButton>
+          </FlexContainer>
         </Students>
       </WalletInner>
     </WalletWrapper>
@@ -493,7 +564,9 @@ const CardInfoCont = styled("div")`
   gap: 1rem;
 `;
 const Students = styled("div")`
-  width: 30%;
+  width: 35%;
+  padding: 0 3rem;
+  margin-left: 2rem;
   /* background-color: red; */
   /* margin: 20px 50px; */
 `;
@@ -593,4 +666,31 @@ const Title1 = styled("h1")`
   font-weight: 600;
   padding: 0;
   margin: 0;
+`;
+const Profile = styled("div")`
+  background: white;
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const BalanceCont = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 2rem;
+  gap: 15px;
+`;
+const BlackButton = styled("div")`
+  background-color: #1e2029;
+  border-radius: 8px;
+  color: white;
+  width: 20%;
+  display: flex;
+  padding: 15px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 `;
