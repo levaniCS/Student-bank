@@ -31,6 +31,15 @@ const GoalsTab = (props: AuthDataProps) => {
     if(router.query.studentId && typeof router.query.studentId === "string") {
       const curr = list.find((i) => i.id === router.query.studentId);
       if (curr) {
+
+        if(router.query.goalId) {
+          const currentGoal = curr && curr.goals && curr.goals.find((i) => i.id === router.query.goalId);
+
+          if(currentGoal) {
+            setValues({ target: { name: 'title', value: currentGoal.title }})
+            setValues({ target: { name: 'description', value: currentGoal.description }})
+          }
+        }
         setStudent(curr);
       }
     }
@@ -49,7 +58,7 @@ const GoalsTab = (props: AuthDataProps) => {
     if (!values.title || !values.description || student === null) return;
 
     const studentId = student.hasOwnProperty("id") ? student.id : '123'
-    props.students.addFieldToStudent(String(studentId), "goals", values);
+    props.students.addFieldToStudent(String(studentId), "goals", values, router.query.goalId as String);
     resetForm();
     router.push({ pathname: "/dashboard/main" });
   };

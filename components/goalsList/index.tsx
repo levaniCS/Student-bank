@@ -20,12 +20,40 @@ const GoalsList = ({ students }: AuthDataProps) => {
   })
 
 
-  console.log('Student with goals')
+  const handleEditGoal = (st: RegisterDataProps, goalId: String | undefined) => {
+    let pushObj = {
+      pathname: "/dashboard/goals",
+      query: {},
+    };
+
+    if (st.id) {
+      pushObj.query = {
+        studentId: st.id,
+        goalId,
+      };
+    }
+
+    router.push(pushObj);
+  }
+
+
+  const handleDeleteGoal = (studentId: String | undefined, goalId: String | undefined) => {
+    if(studentId && goalId) {
+      students.deleteGoalToStudent(studentId, goalId)
+    }
+  }
+
+
+  const handleMarkAsDone = (studentId: String | undefined, goalId: String | undefined) => {
+    if(studentId && goalId) {
+      students.markGoalAsDoneToStudent(studentId, goalId)
+    }
+  }
   
   const renderGoalsList = () =>
     studentsWithGoals.map((st: RegisterDataProps) => {
       const renderGoals = st.goals ? st.goals.map((g: Goals) => (
-        <GoalItem key={String(g.description)}>
+        <GoalItem key={String(g.description)} isDone={g.isDone}>
           <p>{`${st.name} ${st.surname}`}</p>
           <p>{g.title}</p>
           <p style={{ maxWidth: 200 }}>{g.description}</p>
@@ -36,9 +64,9 @@ const GoalsList = ({ students }: AuthDataProps) => {
             variant={'success'}
             title={'ექშენები'}
           >
-            <Dropdown.Item eventKey="1">წაშლა</Dropdown.Item>
-            <Dropdown.Item eventKey="3">ედითი</Dropdown.Item>
-            <Dropdown.Item eventKey="2">შესრულებულად მონიშვნა</Dropdown.Item>
+            <Dropdown.Item eventKey="1" onClick={() => handleDeleteGoal(st.id, g.id)}>წაშლა</Dropdown.Item>
+            <Dropdown.Item eventKey="3" onClick={() => handleEditGoal(st, g.id)}>ედითი</Dropdown.Item>
+            <Dropdown.Item eventKey="2" onClick={() => handleMarkAsDone(st.id, g.id)}>შესრულებულად მონიშვნა</Dropdown.Item>
           </DropdownButton>
         </GoalItem>
       )) : null
@@ -97,17 +125,19 @@ const StudentList = styled("ul")`
   box-shadow: rgb(0 0 0 / 20%) 0px 18px 50px -10px;
   
 `;
-const GoalItem = styled("li")`
+const GoalItem = styled("li")<{ isDone?: boolean }>`
   box-shadow: rgba(0, 0, 0, 0.1) 2px 10px 20px 2px;
   margin: 10px 0;
+  background-color: ${p => p.isDone ? '#03C04A' : 'transparent'};
 
   display: flex;
   justify-content: space-around;
   align-items: center;
+  border-radius: 10px;
 
   p {
     font-size: 15px;
-    color: #547cb1;
+    color: ${p => p.isDone ? '#000' : '#547cb1'};
     margin-left: 60px;
   }
 `;
