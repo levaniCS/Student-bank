@@ -89,7 +89,7 @@ const Wallet = (props: Wallet) => {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            თანხის გადარიცხვა შვილზე ₾
+            თანხის გადარიცხვა შვილზე (ლარებში)
           </Typography>
 
           <FlexContainer
@@ -203,7 +203,7 @@ const Wallet = (props: Wallet) => {
                   >
                     შემოსავალი
                   </Title1>
-                  <Title1>₾ 2.456</Title1>
+                  <Title1>2.456 ლარი</Title1>
                   <FlexContainer style={{ alignItems: "center", gap: "12px" }}>
                     <img src="/icons/stat-up.svg" alt="" />
                     <Title1
@@ -230,7 +230,7 @@ const Wallet = (props: Wallet) => {
                   >
                     გასავალი
                   </Title1>
-                  <Title1>₾ {props.balance.balancePending}</Title1>
+                  <Title1>{props.balance.balancePending} ლარი</Title1>
                   <FlexContainer style={{ alignItems: "center", gap: "12px" }}>
                     <img src="/icons/stat-up.svg" alt="" />
                     <Title1
@@ -321,7 +321,7 @@ const Wallet = (props: Wallet) => {
                       {item.time}
                     </Title1>
                   </FlexContainer>
-                  <Title1>₾ {item.price}</Title1>
+                  <Title1>{item.price} ლარი </Title1>
                   <Title1
                     style={{
                       fontSize: "0.8rem",
@@ -521,7 +521,7 @@ const Wallet = (props: Wallet) => {
                     borderRadius: "8px",
                   }}
                 >
-                  {props.balance.balance.toFixed(2)} ₾
+                  {props.balance.balance.toFixed(2)} ლარი
                 </Title1>
                 <Title1
                   style={{
@@ -639,7 +639,7 @@ const Wallet = (props: Wallet) => {
                     cursor: "pointer",
                   }}
                 >
-                  {props.balance.balance.toFixed(2)} ₾
+                  {props.balance.balance.toFixed(2)} ლარი
                 </Title1>
                 {props.balance.balanceUSD > 0 && (
                   <Title1

@@ -14,7 +14,7 @@ const Contact = () => {
           <Email>
             <Img src="/icons/email.svg" alt="" />
             <MiniTitle>ელფოსტა</MiniTitle>
-            <MiniTitle>contact@lemondo.ge</MiniTitle>
+            <MiniTitle>contact@teamTsu.ge</MiniTitle>
           </Email>
           <Phone>
             <Img src="/icons/phone.svg" alt="" />

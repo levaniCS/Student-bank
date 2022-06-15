@@ -118,7 +118,7 @@ const StudentsList = ({ students }: AuthDataProps) => {
             თქვენ არ დაგიმატებიათ მოსწავლის ანგარიში
           </BalanceTitle>
           {/* <Link href={`/dashboard/student`}> */}
-          <Link href={`/dashboard/goals`}>
+          <Link href={`/dashboard/student`}>
             <StyledButton style={{ width: "50%", fontSize: "15px", margin: 0 }}>
               დამატება
             </StyledButton>

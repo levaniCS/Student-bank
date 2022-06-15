@@ -80,7 +80,7 @@ const MainSection = (props: AuthDataProps) => {
                     }}
                   >
                     <BalanceTitle style={{ fontSize: "24px" }}>
-                      ₾ {props.balance.balance}
+                      {props.balance.balance} ლარი
                     </BalanceTitle>
                     <BalanceTitle
                       style={{ fontSize: "14px", color: "#61BB84" }}
@@ -124,7 +124,7 @@ const MainSection = (props: AuthDataProps) => {
                   }}
                 >
                   <BalanceTitle style={{ fontSize: "24px" }}>
-                    ₾ {props.balance.balance}
+                    {props.balance.balance} ლარი
                   </BalanceTitle>
                 </div>
               </div>
