@@ -19,6 +19,7 @@ const Student = (props: AuthDataProps) => {
       </StyledAddStudentContainer>
       {showForm && (
         <Register
+          style={{ margin: "0" }}
           {...props}
           isStudentAdd
           onCancel={() => setShowForm(!showForm)}
@@ -33,16 +34,16 @@ export default Student;
 const StudentWrapper = styled("div")`
   width: 100%;
   margin: 20px 50px;
-`
+`;
 
 const StyledAddStudentContainer = styled("div")`
   /* height: 100px; */
   width: fit-content;
   color: gray;
   font-weight: bold;
-  background: rgb(229, 241, 255);
+  background: rgb(229, 241, 255, 0.5);
   padding: 20px;
   margin: 20px 0;
-  border-radius: 2rem;
+  border-radius: 8px;
   cursor: pointer;
 `;

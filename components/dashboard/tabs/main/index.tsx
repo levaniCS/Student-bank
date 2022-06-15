@@ -44,7 +44,7 @@ const MainSection = (props: AuthDataProps) => {
             <Title>მთავარი</Title>
             <Profile>
               <img style={{ width: "30px" }} src="/icons/search.svg" alt="" />
-              <ProfilePhoto src="/images/profile.jpg" alt="" />
+              <ProfilePhoto src="/images/user2.png" alt="" />
             </Profile>
           </Header>
         </MainContainer>
@@ -80,12 +80,12 @@ const MainSection = (props: AuthDataProps) => {
                     }}
                   >
                     <BalanceTitle style={{ fontSize: "24px" }}>
-                      ₾ 800
+                      ₾ {props.balance.balance}
                     </BalanceTitle>
                     <BalanceTitle
                       style={{ fontSize: "14px", color: "#61BB84" }}
                     >
-                      $ 266
+                      $ {(props.balance.balance / 3).toFixed(2)}
                     </BalanceTitle>
                   </div>
                 </div>
@@ -93,6 +93,7 @@ const MainSection = (props: AuthDataProps) => {
             </MyCard>
             <Currencies>
               <BalanceTitle>დოლარის კურსი $</BalanceTitle>
+              <img width={"100%"} src="/images/usd.png" alt="" />
             </Currencies>
             <QuickTransfer>
               <H1>სწრაფი გადარიცხვა</H1>
@@ -123,7 +124,7 @@ const MainSection = (props: AuthDataProps) => {
                   }}
                 >
                   <BalanceTitle style={{ fontSize: "24px" }}>
-                    ₾ 800
+                    ₾ {props.balance.balance}
                   </BalanceTitle>
                 </div>
               </div>
@@ -426,7 +427,6 @@ const MainSectionComponent = styled("div")`
   width: 100%;
   height: 100%;
   /* margin: 1rem; */
-  background-image: url("/images/back.png");
   background-size: cover;
 `;
 const MainContainer = styled("div")`
@@ -599,7 +599,7 @@ const MyCard = styled("div")`
 `;
 
 const Balance = styled("div")`
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   width: 100%;
   border-radius: 20px;
   padding: 15px;
@@ -672,14 +672,17 @@ const MainStat = styled("div")`
   /* background: red; */
   padding: 1rem;
   border-radius: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   width: 50%;
   background: white;
 `;
 
 const Currencies = styled("div")`
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   padding: 1rem;
   border-radius: 1rem;
   background: white;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
 `;

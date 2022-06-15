@@ -8,8 +8,8 @@ interface Navigation {
 }
 
 const Navigation = ({ status, user }: Navigation) => {
-  const router = useRouter()
-  const activeNav = router.query.tab
+  const router = useRouter();
+  const activeNav = router.query.tab;
   const isStudent = status.loggedIn && !user.userDetails.isParent;
 
   return (
@@ -37,7 +37,7 @@ const Navigation = ({ status, user }: Navigation) => {
                 }}
               >
                 {activeNav === "student" && (
-                  <CornerLine style={{ top: "175px" }} />
+                  <CornerLine style={{ top: "152px" }} />
                 )}
                 <Icon src="/icons/family.svg" alt="" />
                 <NavTitle>მოსწავლე</NavTitle>
@@ -50,7 +50,7 @@ const Navigation = ({ status, user }: Navigation) => {
                 }}
               >
                 {activeNav === "wallet" && (
-                  <CornerLine style={{ top: "240px" }} />
+                  <CornerLine style={{ top: "202px" }} />
                 )}
                 <Icon src="/icons/wallet.svg" alt="" />
                 <NavTitle>საფულე</NavTitle>
@@ -63,7 +63,7 @@ const Navigation = ({ status, user }: Navigation) => {
                 }}
               >
                 {activeNav === "invoice" && (
-                  <CornerLine style={{ top: "305px" }} />
+                  <CornerLine style={{ top: "253px" }} />
                 )}
                 <Icon src="/icons/invoice.svg" alt="" />
                 <NavTitle>ინვოისი</NavTitle>
@@ -77,7 +77,7 @@ const Navigation = ({ status, user }: Navigation) => {
                   }}
                 >
                   {activeNav === "goals" && (
-                    <CornerLine style={{ top: "370px" }} />
+                    <CornerLine style={{ top: "300px" }} />
                   )}
                   <Icon src="/icons/text.svg" alt="" />
                   <NavTitle>მიზნები</NavTitle>
@@ -91,7 +91,7 @@ const Navigation = ({ status, user }: Navigation) => {
                   }}
                 >
                   {activeNav === "statistic" && (
-                    <CornerLine style={{ top: "432px" }} />
+                    <CornerLine style={{ top: "352px" }} />
                   )}
                   <Icon src="/icons/statistic.svg" alt="" />
                   <NavTitle>სტატისტიკა</NavTitle>
@@ -108,7 +108,7 @@ const Navigation = ({ status, user }: Navigation) => {
                 }}
               >
                 {activeNav === "help" && (
-                  <CornerLine1 style={{ bottom: "87px" }} />
+                  <CornerLine1 style={{ bottom: "67px" }} />
                 )}
                 <Icon src="/icons/info.svg" alt="" />
                 <NavTitle>დახმარება</NavTitle>
@@ -122,7 +122,7 @@ const Navigation = ({ status, user }: Navigation) => {
                 }}
               >
                 {activeNav === "parameter" && (
-                  <CornerLine1 style={{ bottom: "21px" }} />
+                  <CornerLine1 style={{ bottom: "15px" }} />
                 )}
                 <Icon src="/icons/setting.svg" alt="" />
                 <NavTitle>პარამეტრები</NavTitle>

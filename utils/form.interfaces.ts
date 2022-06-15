@@ -12,7 +12,7 @@ export interface AuthDataProps {
       studentId: String,
       fieldName: String,
       data: any,
-      goalId?: String,
+      goalId?: String
     ) => void;
     deleteGoalToStudent: (studentId: String, goalId: String) => void;
     markGoalAsDoneToStudent: (studentId: String, goalId: String) => void;
@@ -21,6 +21,7 @@ export interface AuthDataProps {
     userDetails: RegisterDataProps & { isParent: boolean };
     setUserDetails: () => void;
   };
+  balance: any;
 }
 
 export interface RegisterDataProps {
@@ -44,4 +45,3 @@ export interface Goals {
   description: String;
   isDone?: boolean;
 }
-

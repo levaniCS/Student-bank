@@ -7,6 +7,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 import { AuthDataProps, RegisterDataProps } from "../../utils/form.interfaces";
 import { StyledButton } from "../forms/formStyles";
+import FlexContainer from "../common/FlexContainer";
 
 const StudentsList = ({ students }: AuthDataProps) => {
   const router = useRouter();
@@ -29,11 +30,55 @@ const StudentsList = ({ students }: AuthDataProps) => {
   const renderStudentList = () =>
     list.map((i: RegisterDataProps, idx: number) => {
       return (
-        <StudentItem key={idx}>
-          <p>{i.name}</p>
-          <p>{i.surname}</p>
-          <p>{i.email}</p>
-          <DropdownButton
+        <StudentItem
+          style={{
+            backgroundColor: "white",
+            color: "white",
+            borderRadius: "8px",
+            padding: "5px 10px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+          key={idx}
+        >
+          <FlexContainer style={{ alignItems: "center", gap: "1rem" }}>
+            <img src="/images/user2.png" alt="" />
+            <p
+              style={{
+                color: "black",
+                width: "200px",
+                margin: 0,
+                marginBottom: "5px",
+              }}
+            >
+              {i.name} {i.surname}
+            </p>
+          </FlexContainer>
+          <p
+            style={{
+              color: "black",
+              margin: 0,
+            }}
+          >
+            {i.email}
+          </p>
+          <Title1
+            style={{
+              fontSize: "0.8rem",
+              color: "white",
+              background: "rgb(99 73 209)",
+              padding: "10px",
+              cursor: "pointer",
+              borderRadius: "12px",
+            }}
+            onClick={() => {
+              handleAddGoal(i.id);
+            }}
+          >
+            {"მიზანი"}
+          </Title1>
+          {/* <DropdownButton
             as={ButtonGroup}
             key={"Success"}
             id={`dropdown-variants-success`}
@@ -45,7 +90,7 @@ const StudentsList = ({ students }: AuthDataProps) => {
             <Dropdown.Item eventKey="2" onClick={() => handleAddGoal(i.id)}>
               მიზნის დამატება
             </Dropdown.Item>
-          </DropdownButton>
+          </DropdownButton> */}
         </StudentItem>
       );
     });
@@ -56,12 +101,6 @@ const StudentsList = ({ students }: AuthDataProps) => {
         <>
           <HeaderWrapper>
             <StyledTitle>მოსწავლეები</StyledTitle>
-            <StyledHeader>
-              <p>სახელი</p>
-              <p>გვარი</p>
-              <p>ელ ფოსტა</p>
-              <p>ექშენები</p>
-            </StyledHeader>
           </HeaderWrapper>
           {renderStudentList()}
         </>
@@ -70,13 +109,16 @@ const StudentsList = ({ students }: AuthDataProps) => {
           style={{
             display: "flex",
             alignItems: "center",
+            height: "100%",
+            justifyContent: "center",
             flexDirection: "column",
           }}
         >
           <BalanceTitle style={{ fontSize: 15, marginBottom: "1rem" }}>
             თქვენ არ დაგიმატებიათ მოსწავლის ანგარიში
           </BalanceTitle>
-          <Link href={`/dashboard/student`}>
+          {/* <Link href={`/dashboard/student`}> */}
+          <Link href={`/dashboard/goals`}>
             <StyledButton style={{ width: "50%", fontSize: "15px", margin: 0 }}>
               დამატება
             </StyledButton>
@@ -102,7 +144,12 @@ const HeaderWrapper = styled("div")`
   display: block;
   margin-bottom: 20px;
 `;
-
+const Title1 = styled("h1")`
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+`;
 const StudentList = styled("ul")`
   list-style: none;
   width: 100%;
@@ -111,11 +158,10 @@ const StudentList = styled("ul")`
   padding: 2rem;
   border-radius: 20px;
   background: white;
-
-  box-shadow: rgb(0 0 0 / 20%) 0px 18px 50px -10px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 `;
 const StudentItem = styled("li")`
-  box-shadow: rgba(0, 0, 0, 0.1) 2px 10px 20px 2px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   margin: 10px 0;
 
   display: flex;
