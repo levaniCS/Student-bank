@@ -7,7 +7,7 @@ const Contact = () => {
         <ContactTitle>
           <MiniTitle>დაგვიკავშირდით</MiniTitle>
           <P>
-            არწივი ვნახე დაჭრილი, ყვავ-ყორნებს ეომებოდა, ეწადა ბეჩავს ადგომა,
+            იხილეთ ჩვენი საკონტაქტო ინფორმაცია
           </P>
         </ContactTitle>
         <ContactDiv>

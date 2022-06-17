@@ -63,6 +63,16 @@ const StudentsList = ({ students }: AuthDataProps) => {
           >
             {i.email}
           </p>
+          <p
+            style={{
+              margin: 0,
+            }}
+          >
+              <p
+                style={{ margin: '0 30px', color: "black" }}
+                >ბალანსი</p> <br/>
+            <p style={{ margin: '0 30px', fontWeight: 'bold', color: '#61bb84' }}>{i.balance ? i.balance : 0} ლ</p>
+          </p>
           <Title1
             style={{
               fontSize: "0.8rem",

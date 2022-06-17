@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { Spinner } from "react-bootstrap";
 
 const labels = ["January", "February", "March", "April", "May", "June", "July"];
 const style = {
@@ -68,6 +69,9 @@ const Wallet = (props: Wallet) => {
   const [showForm, setShowForm] = useState(false);
   const [activeStat, setActiveStat] = useState(0);
   const [open, setOpen] = useState(false);
+  const [openGetModal, setOpenGetModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [usdInputVal, setUsdInputVal] = useState("");
   const [euroInputVal, setEuroInputVal] = useState("");
   const [inputVal, setInputVal] = useState("");
@@ -82,6 +86,53 @@ const Wallet = (props: Wallet) => {
   return (
     <>
       <Modal
+        open={openGetModal}
+        onClose={() => setOpenGetModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            მშობლის მიმდინარე ანგარიშზე თანხის შეტანა
+          </Typography>
+
+          {!loading ? (
+            <FlexContainer
+              style={{ gap: "1rem", marginTop: "1rem", flexDirection: "column" }}
+            >
+              <ChildItem>
+                <Input
+                  value={inputVal}
+                  placeholder="რაოდენობა"
+                  onChange={(e) => setInputVal(e.target.value)}
+                />
+                <button
+                  onClick={() => {
+                    setLoading(true);
+                    setTimeout(() => {
+                      props.balance.changeBalance(parseInt(inputVal), "add");
+                      props.balance.changePandingBalance(parseInt(inputVal));
+                      props.balance.saveTransaction('Card', 'Parent', parseInt(inputVal))
+                      setOpenGetModal(false)
+                      setInputVal("");
+                      setLoading(false);
+                    }, 3000)
+                  }}
+                  style={{
+                    background: "#73FFBC",
+                    border: "none",
+                    borderRadius: "8px",
+                    padding: "5px",
+                  }}
+                >
+                  შეტანა
+                </button>
+              </ChildItem>
+            </FlexContainer>
+          ) : <Spinner animation="grow" style={{ marginLeft: '50%' }} />}
+        </Box>
+      </Modal>
+      <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -92,87 +143,87 @@ const Wallet = (props: Wallet) => {
             თანხის გადარიცხვა შვილზე (ლარებში)
           </Typography>
 
-          <FlexContainer
-            style={{ gap: "1rem", marginTop: "1rem", flexDirection: "column" }}
-          >
-            <ChildItem>
-              <Title1
-                style={{
-                  fontSize: "1rem",
-                  color: "#1E2029",
-                  width: "230px",
-                }}
-              >
-                🖐️{props?.students?.list[0]?.name}
-              </Title1>
-              <Input
-                value={inputVal}
-                placeholder="რაოდენობა"
-                onChange={(e) => setInputVal(e.target.value)}
-              />
-              <button
-                onClick={() => {
-                  props.balance.changeBalance(parseInt(inputVal), "dec");
-                  props.balance.changePandingBalance(parseInt(inputVal));
-                  handleClose();
-                  setInputVal("");
-                }}
-                style={{
-                  background: "#73FFBC",
-                  border: "none",
-                  borderRadius: "8px",
-                  padding: "5px",
-                }}
-              >
-                გადარიცხვა
-              </button>
-            </ChildItem>
-            <ChildItem>
-              <Title1
-                style={{
-                  fontSize: "1rem",
-                  color: "#1E2029",
-                  width: "230px",
-                }}
-              >
-                🖐️{props?.students?.list[1]?.name}
-              </Title1>
-              <Input
-                value={inputVal1}
-                placeholder="რაოდენობა"
-                onChange={(e) => setInputVal1(e.target.value)}
-              />
-              <button
-                onClick={() => {
-                  props.balance.changeBalance(parseInt(inputVal1), "dec");
-                  props.balance.changePandingBalance(parseInt(inputVal1));
-                  handleClose();
-                  setInputVal1("");
-                }}
-                style={{
-                  background: "#73FFBC",
-                  border: "none",
-                  borderRadius: "8px",
-                  padding: "5px",
-                }}
-              >
-                გადარიცხვა
-              </button>
-            </ChildItem>
-
-            {/* <button
-              style={{
-                background: "#F82E2E",
-                border: "none",
-                borderRadius: "8px",
-                padding: "5px",
-                color: "white",
-                marginTop: "2rem",
-              }}
+          {!loading ? (
+            <FlexContainer
+              style={{ gap: "1rem", marginTop: "1rem", flexDirection: "column" }}
             >
-              გაუქმება
-            </button> */}
-          </FlexContainer>
+              <ChildItem>
+                <Title1
+                  style={{
+                    fontSize: "1rem",
+                    color: "#1E2029",
+                    width: "230px",
+                  }}
+                >
+                  🖐️{props?.students?.list[0]?.name}
+                </Title1>
+                <Input
+                  value={inputVal}
+                  placeholder="რაოდენობა"
+                  onChange={(e) => setInputVal(e.target.value)}
+                />
+                <button
+                  onClick={() => {
+                    setLoading(true);
+                      setTimeout(() => {
+                        props.balance.changeBalance(parseInt(inputVal), "dec");
+                        props.balance.changePandingBalance(parseInt(inputVal));
+                        props.balance.updateStudentBalance(parseInt(inputVal), "add", props.students.list[0].id)
+                        handleClose();
+                        setInputVal("");
+                      }, 4000)
+                  }}
+                  style={{
+                    background: "#73FFBC",
+                    border: "none",
+                    borderRadius: "8px",
+                    padding: "5px",
+                  }}
+                >
+                  გადარიცხვა
+                </button>
+              </ChildItem>
+              {props?.students?.list[1]?.name && (
+                <ChildItem>
+                  <Title1
+                    style={{
+                      fontSize: "1rem",
+                      color: "#1E2029",
+                      width: "230px",
+                    }}
+                  >
+                    🖐️{props.students.list[1].name}
+                  </Title1>
+                  <Input
+                    value={inputVal1}
+                    placeholder="რაოდენობა"
+                    onChange={(e) => setInputVal1(e.target.value)}
+                  />
+                  <button
+                    onClick={() => {
+                      setLoading(true);
+                      setTimeout(() => {
+                        props.balance.changeBalance(parseInt(inputVal1), "dec");
+                        props.balance.changePandingBalance(parseInt(inputVal1));
+                        props.balance.updateStudentBalance(parseInt(inputVal1), "add", props.students.list[1].id)
+                        setLoading(false)
+                        handleClose();
+                        setInputVal1("");
+                      }, 4000)
+                    }}
+                    style={{
+                      background: "#73FFBC",
+                      border: "none",
+                      borderRadius: "8px",
+                      padding: "5px",
+                    }}
+                  >
+                    გადარიცხვა
+                  </button>
+                </ChildItem>
+              )}
+            </FlexContainer>
+          ) : <Spinner animation="grow" style={{ marginLeft: '50%' }} />}
         </Box>
       </Modal>
       <WalletWrapper>
@@ -693,7 +744,7 @@ const Wallet = (props: Wallet) => {
               >
                 გაგზავნა
               </BlackButton>
-              <BlackButton>მიღება</BlackButton>
+              <BlackButton onClick={() => setOpenGetModal(true)}>მიღება</BlackButton>
             </FlexContainer>
 
             <QuickTransfer>

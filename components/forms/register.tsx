@@ -17,6 +17,7 @@ const Register = (
     style?: any;
   }
 ) => {
+  const isStudentAddForm = props.isStudentAdd
   const router = useRouter();
   const initialState: Partial<RegisterDataProps> = {
     name: "",
@@ -25,6 +26,7 @@ const Register = (
     password: "",
     passwordRepeat: "",
   };
+
   const [values, setValues] = useForm(initialState);
   const [errors, setErrors] = useState<Partial<RegisterDataProps>>({});
 
@@ -38,8 +40,12 @@ const Register = (
       return;
     }
 
-    if (props.isStudentAdd) {
+    if (isStudentAddForm) {
       props.students.addStudent(values, props.user.userDetails.id);
+      if(values.balance > 0) {
+        props.balance.changeBalance(parseInt(values.balance), "dec");
+        props.balance.changePandingBalance(parseInt(values.balance));
+      }
     } else {
       props.status.register(values);
     }
@@ -48,7 +54,7 @@ const Register = (
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      {!props.isStudentAdd && <h1>რეგისტრაცია</h1>}
+      {!isStudentAddForm && <h1>რეგისტრაცია</h1>}
       <StyledInput
         placeholder="სახელი"
         type={"text"}
@@ -74,6 +80,13 @@ const Register = (
         value={values.email}
         onChange={setValues}
       />
+      <StyledInput
+        placeholder="ბალანსი"
+        type={"number"}
+        name="balance"
+        value={values.balance}
+        onChange={setValues}
+      />
       {errors.email && <StyledErrorMessage>{errors.email}</StyledErrorMessage>}
       <StyledInput
         placeholder="პაროლი"
@@ -95,9 +108,9 @@ const Register = (
       {errors.passwordRepeat && (
         <StyledErrorMessage>{errors.passwordRepeat}</StyledErrorMessage>
       )}
-      {props.isStudentAdd ? (
+      {isStudentAddForm ? (
         <div>
-          <StyledButton type="submit">რეგისტრაცია</StyledButton>
+          <StyledButton type="submit">დამატება</StyledButton>
           <StyledButton
             style={{ background: "rgb(40, 97, 161)" }}
             onClick={props.onCancel}

@@ -35,6 +35,7 @@ const AuthProvider = ({ children }) => {
   const [balanceEURO, setBalanceEURO] = useState(0);
   const [balanceGBR, setBalanceGBR] = useState(0);
   const [balancePending, setBalancePending] = useState(130);
+  const [transactionsHistory, setTransactionsHistory] = useState([])
 
   const login = (values) => {
     setLoggedIn(true);
@@ -53,6 +54,39 @@ const AuthProvider = ({ children }) => {
       setBalance(oldBalance - val);
     }
   };
+
+
+  const saveTransaction = (from, to, amount) => {
+    const date = new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    });
+
+    const updatedTransactions = transactionsHistory.length > 0 ? [...transactionsHistory] : []
+    updatedTransactions.push({ from, to, amount, date, cardNumber: '*****342323' })
+    setTransactionsHistory(updatedTransactions)
+  }
+
+
+  const updateStudentBalance = (value, type, studentId) => {
+    const studentsClone = [...students];
+    let currentStudent = studentsClone.find(s => s.id === studentId);
+
+    if(currentStudent) {
+      currentStudent.balance = type ==='add' ? (+currentStudent.balance + (+value)) : (+currentStudent.balance - (+value))
+      const idx = studentsClone.findIndex((i) => i.id === studentId);
+      studentsClone[idx] = currentStudent;
+      setStudents([...studentsClone]);
+      if(+value > 0) {
+        saveTransaction('Parent', `${currentStudent.name} ${currentStudent.surname}`, value)
+      }
+    }
+  };
+
+
   const changePandingBalance = (val) => {
     setBalancePending(val + balancePending);
   };
@@ -96,6 +130,11 @@ const AuthProvider = ({ children }) => {
   const addStudent = (values, parentId) => {
     const oldStudents = [...students];
     const data = { ...values, isParent: false, parentId, id: generateId() };
+
+
+    if(values.balance > 0) {
+      saveTransaction('Parent', `${values.name} ${values.surname}`, values.balance)
+    }
     setStudents([...oldStudents, data]);
   };
 
@@ -182,6 +221,9 @@ const AuthProvider = ({ children }) => {
       changePandingBalance,
       byUSD,
       byEURO,
+      updateStudentBalance,
+      transactionsHistory,
+      saveTransaction
     },
     goals: {
       goals: monthlyGolas,

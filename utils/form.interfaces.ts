@@ -32,6 +32,7 @@ export interface RegisterDataProps {
   password: String;
   passwordRepeat: String;
   goals?: Array<Goals>;
+  balance?: number;
 }
 
 export interface LoginDataProps {

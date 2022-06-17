@@ -36,6 +36,15 @@ const MainSection = (props: AuthDataProps) => {
     },
   };
 
+  const testDate = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  }).replace('June', 'ივნისი')
+    .replace('July', 'ივლისი')
+
   return (
     <MainSectionComponent>
       <MainInner>
@@ -45,6 +54,7 @@ const MainSection = (props: AuthDataProps) => {
             <Profile>
               <img style={{ width: "30px" }} src="/icons/search.svg" alt="" />
               <ProfilePhoto src="/images/user2.png" alt="" />
+              <StyledBalance>{props.balance.balance} ლარი</StyledBalance>
             </Profile>
           </Header>
         </MainContainer>
@@ -372,9 +382,9 @@ const MainSection = (props: AuthDataProps) => {
                       გადარიცხვა ბიტკოინზე
                     </TrasnsactionDetails>
                   </div>
-                  <TrasnsactionDetails>12 ივნ, 2022</TrasnsactionDetails>
+                  <TrasnsactionDetails>ივნისი 12, 2022, 12:43</TrasnsactionDetails>
                   <TrasnsactionDetails>*****342323</TrasnsactionDetails>
-                  <TrasnsactionDetails>-800$</TrasnsactionDetails>
+                  <TrasnsactionDetails>- 800 ლარი</TrasnsactionDetails>
                   <AStatus>წარმატებული</AStatus>
                 </TrasnsactionItem>
                 <TrasnsactionItem>
@@ -389,9 +399,9 @@ const MainSection = (props: AuthDataProps) => {
                     <img src="/images/girl.png" alt="" />
                     <TrasnsactionDetails>შვილზე გადარიცხვა</TrasnsactionDetails>
                   </div>
-                  <TrasnsactionDetails>2 ივნ, 2022</TrasnsactionDetails>
+                  <TrasnsactionDetails>ივნისი 2, 2022, 15:12</TrasnsactionDetails>
                   <TrasnsactionDetails>*****342323</TrasnsactionDetails>
-                  <TrasnsactionDetails>-100$</TrasnsactionDetails>
+                  <TrasnsactionDetails>- 100 ლარი</TrasnsactionDetails>
                   <AStatus>წარმატებული</AStatus>
                 </TrasnsactionItem>
                 <TrasnsactionItem>
@@ -406,11 +416,37 @@ const MainSection = (props: AuthDataProps) => {
                     <img src="/images/pay.png" alt="" />
                     <TrasnsactionDetails>გარეშე გადარიცხვა</TrasnsactionDetails>
                   </div>
-                  <TrasnsactionDetails>12 ივნ, 2022</TrasnsactionDetails>
+                  <TrasnsactionDetails>ივნისი 12, 2022, 11:56</TrasnsactionDetails>
                   <TrasnsactionDetails>*****342323</TrasnsactionDetails>
-                  <TrasnsactionDetails>-800$</TrasnsactionDetails>
+                  <TrasnsactionDetails>- 800 ლარი</TrasnsactionDetails>
                   <AStatus>წარმატებული</AStatus>
                 </TrasnsactionItem>
+                {props?.balance?.transactionsHistory?.length > 0 && (
+                  props?.balance?.transactionsHistory.map((tr, i) => {
+
+                    const isPrentToChild = tr.from === 'Parent'
+                    return (
+                      <TrasnsactionItem key={i}>
+                      <div
+                        style={{
+                          width: "220px",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                        }}
+                      >
+                        <img width="30" src={`/images/${isPrentToChild? 'tra' : 'profits'}.png`} alt="" />
+                        <TrasnsactionDetails>{isPrentToChild ? 'მშობლიდან შვილზე გადარიცხვა' : 'ანგარიშის შევსება'}</TrasnsactionDetails>
+                      </div>
+                      <TrasnsactionDetails>{i.date ? i.date : testDate}</TrasnsactionDetails>
+                      <TrasnsactionDetails>{i.cardNumber ? i.cardNumber : '*****342323'}</TrasnsactionDetails>
+                      <TrasnsactionDetails>{isPrentToChild ? '- ' : '+ '} {tr.amount} ლარი</TrasnsactionDetails>
+                      <AStatus>წარმატებული</AStatus>
+                    </TrasnsactionItem>
+                    )
+                  })
+                  )
+                }
               </TrasnsactionsMain>
             </Trasnsactions>
             <GoalsList {...props} />
@@ -686,3 +722,10 @@ const Currencies = styled("div")`
   gap: 1rem;
   flex-direction: column;
 `;
+
+const StyledBalance = styled("p")`
+  font-size: 20px;
+  transform: translateY(20%);
+  color: #798ba3;
+  font-weight: bold;
+`
